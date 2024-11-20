@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "client/index.js", // or your client-side entry point
+      "use": "@vercel/client"
+    },
+    {
+      "src": "server/index.js", // or your server-side entry point
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/*", // or your API route prefix
+      "dest": "server/index.js"
+    },
+    {
+      "src": "/*", // or your client-side route prefix
+      "dest": "client/index.js"
+    }
+  ]
+}

@@ -47,6 +47,10 @@ body {
   }
 
   .button {
-    @apply text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-4 focus:bg-gray-800 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:bg-gray-700 dark:bg-gray-800
+    @apply text-white bg-gray-800 hover:bg-gray-700  font-medium transition-all ease-in-out duration-500 rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:bg-gray-800
+  }
+
+  .buttonPagination {
+    @apply text-white bg-gray-700 hover:bg-gray-600 transition-all ease-in-out duration-500 rounded-xl font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-700 dark:hover:bg-gray-700 dark:focus:bg-gray-600 dark:bg-gray-700
   }
   

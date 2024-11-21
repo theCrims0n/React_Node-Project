@@ -27,7 +27,7 @@ export const Sidebar = () => {
                 <div className="mt-8 h-px bg-zinc-200 dark:bg-black/14"></div>
                 <div className="relative flex flex-col space-y-4">
                     <Link
-                        to="/users/list"
+                        to="/users/list/1"
                         onClick={() => closeSideMenu()}
                         className="hover:bg-zinc-900  rounded-md hover:text-white flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
                     >

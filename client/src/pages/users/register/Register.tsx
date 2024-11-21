@@ -42,7 +42,7 @@ const RegisterUser = () => {
             if (result.status != 200) {
                 return
             }
-            navigate('/users/list')
+            navigate('/users/list/1')
 
         } catch (error) {
             console.log(error)
@@ -58,7 +58,7 @@ const RegisterUser = () => {
 
         <div className="w-dvw fade-in max-w-lg mx-auto  bg-white shadow  rounded-lg shadow-md m-20 px-8 py-10 flex flex-col ">
             <div className="justify-start pb-2">
-                <Link to={'/users/list'}><button className=" button">Go back</button></Link>
+                <Link to={'/users/list/1'}><button className=" button">Go back</button></Link>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
                 <div className="flex w-full justify-center items-center space-x-4">
@@ -92,7 +92,7 @@ const RegisterUser = () => {
                 </div>
                 <div className="flex items-start flex-col justify-start">
                     <Label htmlFor="department" className="text-gray-800 text-sm mb-2 block">Department</Label>
-                    <Input {...register('department', { required: 'Department is required' })} placeholder="Enter department" type="text" id="department" className={` ${errors.confirmPassword ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} />
+                    <Input {...register('department', { required: 'Department is required' })} placeholder="Enter department" type="number" id="department" className={` ${errors.confirmPassword ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} />
                     <span className="m-1 text-xs text-red-500" hidden={!errors.confirmPassword}>{`${errors?.department?.message}`}</span>
                 </div>
                 <button disabled={isSubmitting} type="submit" className="w-full button">{isSubmitting ? <SpinnerButton /> : 'Register'}</button>

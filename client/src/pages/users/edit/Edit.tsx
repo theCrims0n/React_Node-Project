@@ -64,7 +64,7 @@ const EditUser = () => {
             if (result.status != 200) {
                 return
             }
-            navigate('/users/list')
+            navigate('/users/list/1')
 
 
         } catch (error) {
@@ -86,7 +86,7 @@ const EditUser = () => {
                     :
                     <div className="w-dvw fade-in max-w-lg mx-auto  bg-white shadow  rounded-lg shadow-md m-20 px-8 py-10 flex flex-col ">
                         <div className="justify-start pb-2">
-                            <Link to={'/users/list'}><button className=" button">Go back</button></Link>
+                            <Link to={'/users/list/1'}><button className=" button">Go back</button></Link>
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
                             <div className="flex w-full justify-center items-center space-x-4">

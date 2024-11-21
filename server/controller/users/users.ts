@@ -17,6 +17,23 @@ export const getUsers = async (req: Request, res: Response) => {
     }
 }
 
+export const getUsersPagination = async (req: Request, res: Response) => {
+    try {
+        let { limit, offset }: any = req.body
+
+        const result = await usersSchema.findAll({ limit, offset })
+
+        if (!result) {
+            res.json({ mssge: 'Error' })
+            return
+        }
+        res.json({ result: result })
+
+    } catch (error) {
+        res.json({ error: error })
+    }
+}
+
 export const getUsersById = async (req: Request, res: Response) => {
     try {
 

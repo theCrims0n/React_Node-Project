@@ -1,28 +1,43 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Spinner from "../../../components/ui/spinner/Spinner"
 import { useAuthStore } from "../../../store/auth/auth"
 import { useUsersStore } from "../../../store/users/users"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import { Pencil, Trash2 } from "lucide-react"
+import { Pagination } from "../../../components/ui/pagination/Pagination"
+import UsePagination from "../../../store/pagation/UsePagination"
 
 const UsersList = () => {
-    const { isLoading, isAuthentic } = useAuthStore()
-    const { isLoading: isLoadingUsers, users, getUsers, deleteUser } = useUsersStore()
+
+    const { page }: any = useParams()
+    const pathname = '/users/list'
+    const { isLoading: isLoadingUsers, deleteUser } = useUsersStore()
+    const [totalPages, setTotalPages] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
+    const [data, setData] = useState<any[]>([])
 
     useEffect(() => {
-        getUsers()
-    }, [])
+        setIsLoading(true)
+        const getPagination = async (page: number) => {
+            const url = '/api/users'
+            const { totalPages, data } = await UsePagination({ page, url })
+            setTotalPages(totalPages)
+            setData(data)
+        }
+        getPagination(page)
+        setIsLoading(false)
+    }, [page, isLoadingUsers])
 
     return (<>
         {
-            isLoading || isLoadingUsers
+            isLoading
                 ?
                 <Spinner />
                 :
-                <div>
+                <div >
                     <Link to={'/users/register'}><button className="m-8 button">Create new user</button></Link>
-                    <div className="fade-in m-10 relative flex flex-col h-full overflow-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
-                        <table className="w-full text-left table-auto min-w-max">
+                    <div className="min-h-80 fade-in m-10 relative flex flex-col overflow-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+                        <table className=" w-full text-left table-auto min-w-max">
                             <thead>
                                 <tr className="font-bold">
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -52,7 +67,7 @@ const UsersList = () => {
                             </thead>
                             <tbody>
                                 {
-                                    users.map((user, index) => {
+                                    data.map((user, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className="p-4 border-b border-blue-gray-50">
@@ -78,7 +93,7 @@ const UsersList = () => {
                                                 <td className="py-4 flex space-x-8 ...">
                                                     <div>
                                                         <Link x-data="{ tooltip: 'Edit' }" to={`/users/edit/${user.id}`} className="cursor-pointer">
-                                                            <Pencil color="#366a0c"/>
+                                                            <Pencil color="#366a0c" />
                                                         </Link>
                                                     </div>
                                                     <div >
@@ -91,10 +106,10 @@ const UsersList = () => {
                                         )
                                     })
                                 }
-
                             </tbody>
                         </table>
                     </div>
+                    <Pagination totalPages={totalPages} pathname={pathname} />
                 </div >
 
         }

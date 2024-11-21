@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deteleteUser = exports.editUser = exports.getUsersById = exports.getUsers = void 0;
+exports.deteleteUser = exports.editUser = exports.getUsersById = exports.getUsersPagination = exports.getUsers = void 0;
 const users_1 = __importDefault(require("../../schema/users/users"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
@@ -30,6 +30,21 @@ const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getUsers = getUsers;
+const getUsersPagination = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let { limit, offset } = req.body;
+        const result = yield users_1.default.findAll({ limit, offset });
+        if (!result) {
+            res.json({ mssge: 'Error' });
+            return;
+        }
+        res.json({ result: result });
+    }
+    catch (error) {
+        res.json({ error: error });
+    }
+});
+exports.getUsersPagination = getUsersPagination;
 const getUsersById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;

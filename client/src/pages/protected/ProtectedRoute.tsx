@@ -19,13 +19,13 @@ const ProtectedRoute = () => {
     return (
         <>
 
-            <main className="fade-in flex flex-col min-h-screen" >
-                <Navbar />
+            <main className={`fade-in flex flex-col min-h-screen`} >
                 <Sidebar />
+                <Navbar />
                 {isSideMenuOpen && (
                     <>
                         <div onClick={closeSideMenu}
-                            className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30 " />
+                            className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30" />
                     </>
                 )}
                 <div onClick={closeSideMenu} className={`flex flex-col flex-grow`} >

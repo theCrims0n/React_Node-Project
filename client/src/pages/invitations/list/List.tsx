@@ -7,7 +7,7 @@ import { Pagination } from "../../../components/ui/pagination/Pagination"
 import UsePagination from "../../../store/pagation/UsePagination"
 import { Tooltip } from 'react-tooltip'
 
-const UsersList = () => {
+const InvitationsList = () => {
 
     const { page }: any = useParams()
     const { isLoading: isLoadingUsers, deleteUser } = useUsersStore()
@@ -40,7 +40,7 @@ const UsersList = () => {
                 <Spinner />
                 :
                 <div >
-                    <Link to={'/users/register'}><button className="m-8 button">Create new user</button></Link>
+                    <Link to={'/users/register'}><button className="m-8 button">Create new invitation</button></Link>
                     <div className="min-h-80 fade-in m-10 relative flex flex-col overflow-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
                         <table className=" fade-in w-full text-left table-auto min-w-max">
                             <thead>
@@ -133,4 +133,4 @@ const UsersList = () => {
     </>)
 }
 
-export default UsersList
+export default InvitationsList

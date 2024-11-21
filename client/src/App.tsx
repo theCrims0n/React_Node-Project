@@ -14,6 +14,7 @@ import RegisterUser from './pages/users/register/Register';
 import AuthPages from './pages/auth/protected/AuthPages';
 import EditUser from './pages/users/edit/Edit';
 import ToasterIU from './components/ui/toaster/Toaster';
+import InvitationsList from './pages/invitations/list/List';
 
 const App = () => {
 
@@ -43,6 +44,7 @@ const App = () => {
         <Route element={<ProtectedRoute />} >
           <Route path='/' element={<Home />} />
           <Route path='/users/list/:page' element={<UsersList />} />
+          <Route path='/invitations/list/:page' element={<InvitationsList />} />
           <Route path='/users/register' element={<RegisterUser />} />
           <Route path='/users/edit/:id' element={<EditUser />} />
         </Route>

@@ -57,18 +57,16 @@ const Register = () => {
         <div className="p-8 rounded-2xl bg-white shadow">
             <h2 className="text-gray-800 text-center text-2xl font-bold mb-8">Welcome, Please register here! :D</h2>
             <form onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
-                <div className="flex items-start flex-col justify-start">
-                    <Label htmlFor="name" className=" text-sm mb-2 block">Name</Label>
-                    <Input {...register('name', { required: 'Name field is required' })} placeholder="Enter Name" type="text" id="name" className={`${errors.name ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} />
-                    <div className="relative flex items-center">
-                        <span hidden={!errors.name} className="m-1 text-xs text-red-500">{`${errors?.name?.message}`}</span>
+                <div className="flex w-full justify-center items-center space-x-4">
+                    <div className="flex items-start flex-col justify-start w-full">
+                        <Label htmlFor="name" className="text-gray-800 text-sm mb-2 block">Name</Label>
+                        <Input {...register('name', { required: 'Name is required' })} className={`${errors.name ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} placeholder="Enter Name" type="text" id="name" />
+                        <span className="m-1 text-xs text-red-500" hidden={!errors.name}>{`${errors?.name?.message}`}</span>
                     </div>
-                </div>
-                <div className="flex items-start flex-col justify-start">
-                    <Label htmlFor="lastname" className=" text-sm mb-2 block">Last Name</Label>
-                    <Input {...register('lastname', { required: 'Last Name field is required' })} placeholder="Enter Last Name" type="text" id="lastname" className={`${errors.lastname ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} />
-                    <div className="relative flex items-center">
-                        <span hidden={!errors.lastname} className="m-1 text-xs text-red-500">{`${errors?.lastname?.message}`}</span>
+                    <div className="flex items-start flex-col justify-start w-full">
+                        <Label htmlFor="lastname" className="text-gray-800 text-sm mb-2 block">Last Name</Label>
+                        <Input {...register('lastname', { required: 'Last Name is required' })} className={`${errors.lastname ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} placeholder="Enter Last Name" type="text" id="lastname" />
+                        <span className="m-1 text-xs text-red-500" hidden={!errors.lastname}>{`${errors?.lastname?.message}`}</span>
                     </div>
                 </div>
                 <div className="h-full">

@@ -1,7 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useAuthStore } from "../store/auth/auth";
-import { Navigate, useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 export const AuthContext = createContext({})
 
 export const useAuth = () => {

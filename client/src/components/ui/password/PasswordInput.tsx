@@ -58,7 +58,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
                             className="pe-9 w-full"
                             placeholder="Password"
                             type={isVisible ? "text" : "password"}
-                            value={password}
+                            defaultValue={password}
                             onChange={(e: any) => setPassword(e.target.value)}
                             aria-invalid={strengthScore < 4}
                             aria-describedby="password-strength"

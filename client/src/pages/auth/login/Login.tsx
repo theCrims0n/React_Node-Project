@@ -38,7 +38,7 @@ const Login = () => {
 
     return (
 
-        <div className="p-8 rounded-2xl bg-white shadow ">
+        <div className="p-8 rounded-2xl bg-white shadow">
             <div className="place-items-center m-6">
                 <motion.div initial={{ opacity: 0 }} animate={{
                     opacity: 1,

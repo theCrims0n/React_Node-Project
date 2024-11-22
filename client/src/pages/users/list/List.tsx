@@ -6,38 +6,10 @@ import { Pencil, RefreshCcw, Trash2 } from "lucide-react"
 import { Pagination } from "../../../components/ui/pagination/Pagination"
 import UsePagination from "../../../store/pagation/UsePagination"
 import { Tooltip } from 'react-tooltip'
-import { Pencil, Trash2 } from "lucide-react"
-import { Pagination } from "../../../components/ui/pagination/Pagination"
-import UsePagination from "../../../store/pagation/UsePagination"
-import { Tooltip } from 'react-tooltip'
-
 
 const UsersList = () => {
 
     const { page }: any = useParams()
-    const { isLoading: isLoadingUsers, deleteUser } = useUsersStore()
-    const [totalPages, setTotalPages] = useState(0)
-    const [isLoading, setIsLoading] = useState(true)
-    const [data, setData] = useState<any[]>([])
-    const [idDelete, setIdDelete] = useState(0)
-
-    useEffect(() => {
-
-        getPagination(page)
-
-    }, [page, isLoadingUsers])
-
-    const getPagination = async (page: number) => {
-        const url = '/api/users'
-        const { totalPages, data } = await UsePagination({ page, url })
-        setTotalPages(totalPages)
-        setData(data)
-        setIsLoading(false)
-        setTimeout(() => {
-            setIdDelete(0)
-        }, 500);
-    }
-    const pathname = '/users/list'
     const { isLoading: isLoadingUsers, deleteUser } = useUsersStore()
     const [totalPages, setTotalPages] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
@@ -83,7 +55,6 @@ const UsersList = () => {
                     <Link to={'/users/register'}><button className="m-8 button">Create new user</button></Link>
                     <div className="min-h-80 fade-in m-10 relative flex flex-col overflow-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
                         <table className=" fade-in w-full text-left table-auto min-w-max">
-                        <table className=" w-full text-left table-auto min-w-max">
                             <thead>
                                 <tr className="font-bold">
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -156,7 +127,7 @@ const UsersList = () => {
                         </table>
                     </div>
                     <div className="flex justify-center pr-4">
-                        <div className="pt-10 mr-4">
+                        <div className="pt-20 mr-4">
                             <button id='tooltip-default' onClick={() => getPagination(page)}>
                                 <RefreshCcw />
                             </button>
@@ -169,6 +140,7 @@ const UsersList = () => {
                             {totalPages > 0 && (<Pagination totalPages={totalPages} />)}
                         </div>
                     </div>
+
                 </div >
         }
     </>)

@@ -1,4 +1,5 @@
 import axios from "../../axios/axios";
+import { Users } from "../../interface/users/users";
 
 interface Pagination {
     page?: number;
@@ -17,6 +18,10 @@ const UsePagination = async ({
         const offset = (page - 1) * limit;
         const resultPagination: any = await axios.post(url + '/pagination', { limit, offset })
         const totalPages = Math.ceil(result.data.result.length / limit);
+        const limit = 3;
+        const offset = (page - 1) * limit;
+        const resultPagination: any = await axios.post(url + '/pagination', { limit, offset })
+        const totalPages = Math.ceil(result.data.result.length / 3);
 
         return {
             currentPage: page,

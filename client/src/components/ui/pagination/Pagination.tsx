@@ -17,14 +17,6 @@ export const Pagination = ({ totalPages }: Props) => {
     const navigate = useNavigate()
     const location = useLocation().pathname.toString().split('/')
     const pathname = '/' + location[1] + '/' + location[2]
-    const pathname: string;
-}
-
-
-export const Pagination = ({ totalPages, pathname }: Props) => {
-
-    const { page } = useParams();
-    const navigate = useNavigate()
 
     const pageString = page ?? 1;
     const currentPage = isNaN(+pageString) ? 1 : +pageString;
@@ -37,11 +29,6 @@ export const Pagination = ({ totalPages, pathname }: Props) => {
         }
     }, [totalPages])
 
-    if (currentPage < 1 || isNaN(+pageString)) {
-        navigate(pathname);
-    }
-
-    const allPages = generatePaginationNumbers(currentPage, totalPages);
 
     const createPageUrl = (pageNumber: number | string) => {
 
@@ -49,8 +36,6 @@ export const Pagination = ({ totalPages, pathname }: Props) => {
 
         if (pageNumber === '...') {
             return `${pathname}/${page}`
-
-            return `${pathname}?${params}`
         }
 
         if (+pageNumber <= 0) {
@@ -69,7 +54,6 @@ export const Pagination = ({ totalPages, pathname }: Props) => {
 
     return (
         <div className="fade-in flex text-center justify-center mt-10 mb-32">
-        <div className="flex text-center justify-center mt-10 mb-32">
             <nav aria-label="Page navigation example">
                 <ul className="inline-flex -space-x-px text-base h-10">
                     <li>
@@ -89,17 +73,7 @@ export const Pagination = ({ totalPages, pathname }: Props) => {
 
                             )
                         })
-                        allPages.map((page, index) => (
-                            <li>
-                                <Link to={createPageUrl(page)} className={clsx(
-                                    "button",
-                                    {
-                                        'buttonPagination': page === currentPage
-                                    }
-                                )}>{page}</Link>
-                            </li>
 
-                        ))
                     }
                     <li>
                         <Link to={createPageUrl(currentPage + 1)} className="button">Next</Link>

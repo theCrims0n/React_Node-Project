@@ -4,19 +4,14 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{html,js}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          '"Inter var", sans-serif',
-          {
-            fontFeatureSettings: '"cv11", "ss01"',
-            fontVariationSettings: '"opsz" 32'
-          },
-        ],
+        'primary': ['Montserrat'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

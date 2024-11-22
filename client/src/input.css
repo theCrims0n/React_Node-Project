@@ -1,10 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @layer base {
   html {
-    font-family: "Proxima Nova", system-ui, sans-serif;
+    font-family: "Montserrat", system-ui sans-serif;
   }
 }
 :root {
@@ -14,6 +14,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 body {
+  font-family: "Montserrat", system-ui sans-serif;
     color: rgb(var(--foreground-rgb));
     background: linear-gradient(
         to bottom,
@@ -48,9 +49,13 @@ body {
 
   .button {
     @apply text-white bg-gray-800 hover:bg-gray-700  font-medium transition-all ease-in-out duration-500 rounded text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:bg-gray-800
+
   }
 
   .buttonPagination {
     @apply text-white bg-gray-700 hover:bg-gray-600 transition-all ease-in-out duration-500 rounded-xl font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-700 dark:hover:bg-gray-700 dark:focus:bg-gray-600 dark:bg-gray-700
   }
-  
+
+  .buttonPagination {
+    @apply text-white bg-gray-700 hover:bg-gray-600 transition-all ease-in-out duration-500 rounded-xl font-medium text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-700 dark:hover:bg-gray-700 dark:focus:bg-gray-600 dark:bg-gray-700
+  }

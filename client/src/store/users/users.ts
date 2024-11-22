@@ -49,6 +49,19 @@ export const useUsersStore = create<State>()(
             }
         },
         deleteUser: async (id) => {
+            set({ isLoading: true })
+            setTimeout(async () => {
+                try {
+                    const result = await axios.delete(`/api/users/${id}`)
+                    set({ isLoading: false, users: result.data.result })
+                    toast.success('User deleted successfully')
+                } catch (error: any) {
+                    console.log(error)
+                    const { mssge } = error.response.data
+                    toast.error(mssge)
+                    set({ isLoading: false })
+                }
+            }, 250);
             try {
                 set({ isLoading: true })
                 const result = await axios.delete(`/api/users/${id}`)

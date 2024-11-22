@@ -7,9 +7,6 @@ import { Pagination } from "../../../components/ui/pagination/Pagination"
 import UsePagination from "../../../store/pagation/UsePagination"
 import { Tooltip } from 'react-tooltip'
 
-import { Pencil, Trash2 } from "lucide-react"
-import { Pagination } from "../../../components/ui/pagination/Pagination"
-import UsePagination from "../../../store/pagation/UsePagination"
 
 const UsersList = () => {
 
@@ -36,11 +33,6 @@ const UsersList = () => {
             setIdDelete(0)
         }, 500);
     }
-    const pathname = '/users/list'
-    const { isLoading: isLoadingUsers, deleteUser } = useUsersStore()
-    const [totalPages, setTotalPages] = useState(0)
-    const [isLoading, setIsLoading] = useState(false)
-    const [data, setData] = useState<any[]>([])
 
     useEffect(() => {
         setIsLoading(true)
@@ -64,7 +56,6 @@ const UsersList = () => {
                     <Link to={'/users/register'}><button className="m-8 button">Create new user</button></Link>
                     <div className="min-h-80 fade-in m-10 relative flex flex-col overflow-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
                         <table className=" fade-in w-full text-left table-auto min-w-max">
-                        <table className=" w-full text-left table-auto min-w-max">
                             <thead>
                                 <tr className="font-bold">
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -150,7 +141,6 @@ const UsersList = () => {
                             {totalPages > 0 && (<Pagination totalPages={totalPages} />)}
                         </div>
                     </div>
-                    <Pagination totalPages={totalPages} pathname={pathname} />
                 </div >
         }
     </>)

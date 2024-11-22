@@ -1,5 +1,3 @@
-'use client';
-
 import clsx from 'clsx';
 import { generatePaginationNumbers } from '../../../utils/generatePaginationNumbers';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';

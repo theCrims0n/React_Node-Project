@@ -115,7 +115,7 @@ const InvitationsList = () => {
                         </table>
                     </div>
                     <div className="flex justify-center pr-4">
-                        <div className="pt-10 mr-4">
+                        <div className="pt-20 mr-4">
                             <button id='tooltip-default' onClick={() => getPagination(page)}>
                                 <RefreshCcw />
                             </button>

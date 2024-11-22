@@ -1,5 +1,3 @@
-'use client';
-
 import clsx from 'clsx';
 import { generatePaginationNumbers } from '../../../utils/generatePaginationNumbers';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
@@ -9,7 +7,6 @@ import { useEffect } from 'react';
 
 interface Props {
     totalPages: number;
-}
 
 export const Pagination = ({ totalPages }: Props) => {
 
@@ -17,14 +14,6 @@ export const Pagination = ({ totalPages }: Props) => {
     const navigate = useNavigate()
     const location = useLocation().pathname.toString().split('/')
     const pathname = '/' + location[1] + '/' + location[2]
-    const pathname: string;
-}
-
-
-export const Pagination = ({ totalPages, pathname }: Props) => {
-
-    const { page } = useParams();
-    const navigate = useNavigate()
 
     const pageString = page ?? 1;
     const currentPage = isNaN(+pageString) ? 1 : +pageString;
@@ -42,6 +31,13 @@ export const Pagination = ({ totalPages, pathname }: Props) => {
     }
 
     const allPages = generatePaginationNumbers(currentPage, totalPages);
+
+    useEffect(() => {
+        if (currentPage > totalPages || currentPage < 1 || isNaN(+pageString)) {
+            navigate(`${pathname}/${allPages.length.toString()}`);
+        }
+    }, [totalPages])
+
 
     const createPageUrl = (pageNumber: number | string) => {
 
@@ -89,6 +85,7 @@ export const Pagination = ({ totalPages, pathname }: Props) => {
 
                             )
                         })
+
                         allPages.map((page, index) => (
                             <li>
                                 <Link to={createPageUrl(page)} className={clsx(

@@ -6,10 +6,11 @@ import { Pencil, RefreshCcw, Trash2 } from "lucide-react"
 import { Pagination } from "../../../components/ui/pagination/Pagination"
 import UsePagination from "../../../store/pagation/UsePagination"
 import { Tooltip } from 'react-tooltip'
-
 import { Pencil, Trash2 } from "lucide-react"
 import { Pagination } from "../../../components/ui/pagination/Pagination"
 import UsePagination from "../../../store/pagation/UsePagination"
+import { Tooltip } from 'react-tooltip'
+
 
 const UsersList = () => {
 
@@ -39,8 +40,26 @@ const UsersList = () => {
     const pathname = '/users/list'
     const { isLoading: isLoadingUsers, deleteUser } = useUsersStore()
     const [totalPages, setTotalPages] = useState(0)
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState<any[]>([])
+    const [idDelete, setIdDelete] = useState(0)
+
+    useEffect(() => {
+
+        getPagination(page)
+
+    }, [page, isLoadingUsers])
+
+    const getPagination = async (page: number) => {
+        const url = '/api/users'
+        const { totalPages, data } = await UsePagination({ page, url })
+        setTotalPages(totalPages)
+        setData(data)
+        setIsLoading(false)
+        setTimeout(() => {
+            setIdDelete(0)
+        }, 500);
+    }
 
     useEffect(() => {
         setIsLoading(true)
@@ -150,7 +169,6 @@ const UsersList = () => {
                             {totalPages > 0 && (<Pagination totalPages={totalPages} />)}
                         </div>
                     </div>
-                    <Pagination totalPages={totalPages} pathname={pathname} />
                 </div >
         }
     </>)

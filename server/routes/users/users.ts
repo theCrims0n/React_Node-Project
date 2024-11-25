@@ -1,13 +1,15 @@
 import { Router } from "express";
 import { deteleteUser, editUser, getUsers, getUsersById, getUsersPagination } from "../../controller/users/users";
+import { validateJWT } from "../../helper/jwt";
 
-const { validateJWT } = require('../../helper/jwt')
 const router = Router()
 
-router.get('/', validateJWT, getUsers)
-router.post('/pagination', validateJWT, getUsersPagination)
-router.get('/:id', validateJWT, getUsersById)
-router.put('/', validateJWT, editUser)
-router.delete('/:id', validateJWT, deteleteUser)
+if (validateJWT!) {
+    router.get('/', getUsers)
+    router.post('/pagination', getUsersPagination)
+    router.get('/:id', getUsersById)
+    router.put('/', editUser)
+    router.delete('/:id', deteleteUser)
+}
 
 export default router

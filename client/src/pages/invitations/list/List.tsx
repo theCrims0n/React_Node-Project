@@ -6,6 +6,7 @@ import { Pencil, RefreshCcw, Trash2 } from "lucide-react"
 import { Pagination } from "../../../components/ui/pagination/Pagination"
 import UsePagination from "../../../store/pagation/UsePagination"
 import { Tooltip } from 'react-tooltip'
+import { RefreshButton } from "../../../components/ui/refresh/RefreshButton"
 
 const InvitationsList = () => {
 
@@ -114,19 +115,8 @@ const InvitationsList = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="flex justify-center pr-4">
-                        <div className="pt-20 mr-4">
-                            <button id='tooltip-default' onClick={() => getPagination(page)}>
-                                <RefreshCcw />
-                            </button>
-                            <Tooltip
-                                anchorSelect="#tooltip-default"
-                                content="Refresh"
-                            />
-                        </div>
-                        <div>
-                            {totalPages > 0 && (<Pagination totalPages={totalPages} />)}
-                        </div>
+                    <div className="flex flex-wrap justify-center mt-10">
+                        <Pagination url={'/api/invitations'} />
                     </div>
                 </div >
         }

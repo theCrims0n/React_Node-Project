@@ -47,7 +47,7 @@ const Recovery = () => {
         <div >
 
             <div className="p-8 rounded-2xl bg-white shadow">
-                <h2 className="text-gray-800 text-center text-2xl font-bold">Recover your password</h2>
+                <h2 className="text-gray-800 text-center text-2xl font-medium">Recover your password</h2>
                 <form onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4">
                     <div className="h-full">
                         <Label className=" text-sm mb-2 block">Email</Label>
@@ -75,7 +75,7 @@ const Recovery = () => {
                     <div >
                         <div className="flex items-stretch">
                             <div >
-                                <Link to={'/auth/login'}><button className="button">Cancel</button></Link>
+                                <Link to={'/auth/login'}><button className="buttonCancel">Cancel</button></Link>
                             </div>
                             <div className="pl-2 w-full">
                                 <button disabled={isLoading} type="submit" className="w-full button">

@@ -15,12 +15,13 @@ import AuthPages from './pages/auth/protected/AuthPages';
 import EditUser from './pages/users/edit/Edit';
 import ToasterIU from './components/ui/toaster/Toaster';
 import InvitationsList from './pages/invitations/list/List';
+import Perfil from './pages/main/perfil/Perfil';
 
 const App = () => {
 
   const token = Cookies.get('token')
   const navigate = useNavigate()
-  const { isAuthentic, token: tokenNode, clear, verify } = useAuthStore()
+  const { isAuthentic, clear, verify } = useAuthStore()
 
   useEffect(() => {
     if (token && isAuthentic) {
@@ -34,6 +35,7 @@ const App = () => {
   }, [navigate, token, isAuthentic]);
 
   return (
+    <div className='font-normal'>
     <AuthProvider>
       <Routes>
         <Route element={<AuthPages />}>
@@ -47,10 +49,12 @@ const App = () => {
           <Route path='/invitations/list/:page' element={<InvitationsList />} />
           <Route path='/users/register' element={<RegisterUser />} />
           <Route path='/users/edit/:id' element={<EditUser />} />
+          <Route path='/perfil' element={<Perfil />} />
         </Route>
       </Routes>
       <ToasterIU />
     </AuthProvider>
+    </div>
   );
 }
 

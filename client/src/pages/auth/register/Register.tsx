@@ -55,7 +55,7 @@ const Register = () => {
     return (
 
         <div className="p-8 rounded-2xl bg-white shadow">
-            <h2 className="text-gray-800 text-center text-2xl font-bold mb-8">Welcome, Please register here! :D</h2>
+            <h2 className="text-gray-800 text-center text-2xl font-medium mb-8">Welcome, Please register here! :D</h2>
             <form onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
                 <div className="flex w-full justify-center items-center space-x-4">
                     <div className="flex items-start flex-col justify-start w-full">

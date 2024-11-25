@@ -1,109 +1,79 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Spinner from "../../../components/ui/spinner/Spinner"
-import { useUsersStore } from "../../../store/users/users"
-import { Link, useLocation, useParams } from "react-router-dom"
-import { Pencil, RefreshCcw, Trash2 } from "lucide-react"
+import { Link } from "react-router-dom"
+import { Pencil, Trash2 } from "lucide-react"
 import { Pagination } from "../../../components/ui/pagination/Pagination"
-import UsePagination from "../../../store/pagation/UsePagination"
-import { Tooltip } from 'react-tooltip'
+import { DialogModal } from "../../../components/ui/dialog/Dialog"
+import { useModalStore } from "../../../store/ui/modal"
+import { usePaginationStore } from "../../../store/pagination-store/pagination"
 
 const UsersList = () => {
 
-    const { page }: any = useParams()
-    const { isLoading: isLoadingUsers, deleteUser } = useUsersStore()
-    const [totalPages, setTotalPages] = useState(0)
-    const [isLoading, setIsLoading] = useState(true)
-    const [data, setData] = useState<any[]>([])
+    const { openModalMenu } = useModalStore()
+    const { data, isLoadingPagination } = usePaginationStore()
     const [idDelete, setIdDelete] = useState(0)
-
-    useEffect(() => {
-
-        getPagination(page)
-
-    }, [page, isLoadingUsers])
-
-    const getPagination = async (page: number) => {
-        const url = '/api/users'
-        const { totalPages, data } = await UsePagination({ page, url })
-        setTotalPages(totalPages)
-        setData(data)
-        setIsLoading(false)
-        setTimeout(() => {
-            setIdDelete(0)
-        }, 500);
-    }
-
-    useEffect(() => {
-        setIsLoading(true)
-        const getPagination = async (page: number) => {
-            const url = '/api/users'
-            const { totalPages, data } = await UsePagination({ page, url })
-            setTotalPages(totalPages)
-            setData(data)
-        }
-        getPagination(page)
-        setIsLoading(false)
-    }, [page, isLoadingUsers])
 
     return (<>
         {
-            isLoading
+            isLoadingPagination
                 ?
                 <Spinner />
                 :
-                <div >
+                <div>
+                    <DialogModal value={idDelete} title="Delete user" content="Are you sure you want to delete this user? All of its data will be permanently removed.
+                                                This action cannot be undone." />
                     <Link to={'/users/register'}><button className="m-8 button">Create new user</button></Link>
-                    <div className="min-h-80 fade-in m-10 relative flex flex-col overflow-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
-                        <table className=" fade-in w-full text-left table-auto min-w-max">
-                            <thead>
-                                <tr className="font-bold">
+                    <div className="fade-in min-h-80 m-10 relative flex flex-col overflow-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+                        <table className="w-full text-left table-auto min-w-max ">
+                            <thead className="font-medium">
+                                <tr>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block antialiased leading-none text-blue-gray-900 ">
+                                        <p className="font-medium block leading-none text-blue-gray-900 ">
                                             Name
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block antialiased  leading-none text-blue-gray-900 ">
+                                        <p className="block font-medium  leading-none text-blue-gray-900 ">
                                             Last Name
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block antialiased  leading-none text-blue-gray-900 ">
+                                        <p className="block font-medium  leading-none text-blue-gray-900 ">
                                             Email
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block antialiased  leading-none text-blue-gray-900 ">
+                                        <p className="block  font-medium leading-none text-blue-gray-900 ">
                                             Department
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block antialiased  leading-none text-blue-gray-900 ">Actions</p>
+                                        <p className="block  font-medium leading-none text-blue-gray-900 ">Actions</p>
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody >
                                 {
                                     data.map((user, index) => {
                                         return (
-                                            <tr key={index} className={user.id == idDelete ? 'opacity-0 transition-all duration-500' : ''}>
+                                            <tr key={index} className="hover:bg-gray-100 font=normal text-sm">
                                                 <td className="p-4 border-b border-blue-gray-50">
-                                                    <p className="block antialiased  leading-normal text-blue-gray-900">
+                                                    <p className="block  text-gray-800 ">
                                                         {user.name}
                                                     </p>
                                                 </td>
                                                 <td className="p-4 border-b border-blue-gray-50">
-                                                    <p className="block antialiased  leading-normal text-blue-gray-900">
+                                                    <p className="block  text-gray-800">
                                                         {user.lastname}
                                                     </p>
                                                 </td>
                                                 <td className="p-4 border-b border-blue-gray-50">
-                                                    <p className="block antialiased  leading-normal text-blue-gray-900">
+                                                    <p className="block  text-gray-800">
                                                         {user.email}
                                                     </p>
                                                 </td>
                                                 <td className="p-4 border-b border-blue-gray-50">
-                                                    <p className="block antialiased  leading-normal text-blue-gray-900">
+                                                    <p className="block text-gray-800">
                                                         {user.department}
                                                     </p>
                                                 </td>
@@ -114,9 +84,9 @@ const UsersList = () => {
                                                         </Link>
                                                     </div>
                                                     <div >
-                                                        <a x-data="{ tooltip: 'Delete' }" onClick={() => [setIdDelete(user.id), deleteUser(user.id)]} className="cursor-pointer">
+                                                        <button type="button" onClick={() => [openModalMenu(), setIdDelete(user.id)]} className="cursor-pointer block">
                                                             <Trash2 color="#920c0c" />
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -126,23 +96,11 @@ const UsersList = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="flex justify-center pr-4">
-                        <div className="pt-20 mr-4">
-                            <button id='tooltip-default' onClick={() => getPagination(page)}>
-                                <RefreshCcw />
-                            </button>
-                            <Tooltip
-                                anchorSelect="#tooltip-default"
-                                content="Refresh"
-                            />
-                        </div>
-                        <div>
-                            {totalPages > 0 && (<Pagination totalPages={totalPages} />)}
-                        </div>
-                    </div>
-
                 </div >
         }
+        <div className="flex flex-wrap justify-center mt-1">
+            <Pagination url={'/api/users'} />
+        </div>
     </>)
 }
 

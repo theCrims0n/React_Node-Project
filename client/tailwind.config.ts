@@ -11,7 +11,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        'primary': ['Montserrat'],
+       sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
+      },
+      gridAutoColumns: {
+        '2fr': 'minmax(0, 2fr)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

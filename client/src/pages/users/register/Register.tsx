@@ -8,6 +8,7 @@ import { Input } from '../../../components/ui/input/Input'
 import { Label } from "../../../components/ui/label/Label";
 import { useUsersStore } from "../../../store/users/users";
 import { PasswordInput } from "../../../components/ui/password/PasswordInput";
+import Form from "../../../components/ui/form/Form";
 
 const RegisterUser = () => {
 
@@ -55,11 +56,8 @@ const RegisterUser = () => {
     }, [])
 
     return (
-
-        <div className="w-dvw fade-in max-w-lg mx-auto  bg-white shadow  rounded-lg shadow-md m-20 px-8 py-10 flex flex-col ">
-            <div className="justify-start pb-2">
-                <Link to={'/users/list/1'}><button className=" button">Go back</button></Link>
-            </div>
+        <Form>
+            <h1 className="font-medium text-lg mb-4 text-zinc-800">Register form</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
                 <div className="flex w-full justify-center items-center space-x-4">
                     <div className="flex items-start flex-col justify-start w-full">
@@ -95,9 +93,13 @@ const RegisterUser = () => {
                     <Input {...register('department', { required: 'Department is required' })} placeholder="Enter department" type="number" id="department" className={` ${errors.confirmPassword ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} />
                     <span className="m-1 text-xs text-red-500" hidden={!errors.confirmPassword}>{`${errors?.department?.message}`}</span>
                 </div>
-                <button disabled={isSubmitting} type="submit" className="w-full button">{isSubmitting ? <SpinnerButton /> : 'Register'}</button>
+                <div className="flex justify-end ">
+                    <Link to={'/users/list/1'}><button className="buttonCancel">Cancel</button></Link>
+                    <button disabled={isSubmitting} type="submit" className="w-20 button ">{isSubmitting ? <SpinnerButton /> : 'Register'}</button>
+                    
+                </div>
             </form>
-        </div>
+        </Form>
     )
 }
 

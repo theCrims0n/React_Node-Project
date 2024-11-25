@@ -11,6 +11,7 @@ import Spinner from "../../../components/ui/spinner/Spinner";
 import CryptoJS from 'crypto-js';
 import Base64 from 'crypto-js/enc-base64';
 import { PasswordInput } from "../../../components/ui/password/PasswordInput";
+import Form from "../../../components/ui/form/Form";
 
 const EditUser = () => {
 
@@ -84,28 +85,24 @@ const EditUser = () => {
                     ?
                     <Spinner />
                     :
-                    <div className="w-dvw fade-in max-w-lg mx-auto  bg-white shadow  rounded-lg shadow-md m-20 px-8 py-10 flex flex-col ">
-                        <div className="justify-start pb-2">
-                            <Link to={'/users/list/1'}><button className=" button">Go back</button></Link>
-                        </div>
-                        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
+                    <Form>
+                        <h1 className="font-medium text-lg mb-4 text-zinc-800">Edit form</h1>
+                        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4 font-medium">
                             <div className="flex w-full justify-center items-center space-x-4">
                                 <div className="flex items-start flex-col justify-start w-full">
                                     <Label htmlFor="name" className="text-gray-800 text-sm mb-2 block">Name</Label>
-                                    <Input defaultValue={user[0]?.name} {...register('name', { required: 'Name is required' })} placeholder="Enter Name" type="text" id="name" />
+                                    <Input defaultValue={user[0]?.name} {...register('name', { required: 'Name is required' })} autoComplete="name" placeholder="Enter Name" type="text" id="name" />
                                     <span className="m-1 text-xs text-red-500" hidden={!errors.name}>{`${errors?.name?.message}`}</span>
-
                                 </div>
                                 <div className="flex items-start flex-col justify-start w-full">
                                     <Label htmlFor="lastname" className="text-gray-800 text-sm mb-2 block">Last Name</Label>
                                     <Input defaultValue={user[0]?.lastname} {...register('lastname', { required: 'Last Name is required' })} placeholder="Enter Last Name" type="text" id="lastname" />
                                     <span className="m-1 text-xs text-red-500" hidden={!errors.lastname}>{`${errors?.lastname?.message}`}</span>
-
                                 </div>
                             </div>
                             <div className="flex items-start flex-col justify-start">
                                 <Label htmlFor="email" className="text-gray-800 text-sm mb-2 block">Email</Label>
-                                <Input defaultValue={user[0]?.email} {...register('email', { required: 'Email is required' })} placeholder="Enter Email" type="text" id="email" name="email" />
+                                <Input defaultValue={user[0]?.email} {...register('email', { required: 'Email is required' })} autoComplete="email" placeholder="Enter Email" type="text" id="email" name="email" />
                                 <span className="m-1 text-xs text-red-500" hidden={!errors.email}>{`${errors?.email?.message}`}</span>
                                 <span className="m-1 text-xs text-red-500" hidden={!errorMessage}>{`${errorMessage}`}</span>
                             </div>
@@ -124,9 +121,12 @@ const EditUser = () => {
                                 <Input defaultValue={user[0]?.department} {...register('department', { required: 'Department is required' })} placeholder="Enter department" type="number" id="department" className={` ${errors.confirmPassword ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} />
                                 <span className="m-1 text-xs text-red-500" hidden={!errors.department}>{`${errors?.department?.message}`}</span>
                             </div>
-                            <button disabled={isSubmitting} type="submit" className="w-full button">{isSubmitting ? <SpinnerButton /> : 'Edit'}</button>
+                            <div className="flex justify-end">
+                                <Link to={'/users/list/1'}><button className="buttonCancel">Cancel</button></Link>
+                                <button disabled={isSubmitting} type="submit" className="w-20 button">{isSubmitting ? <SpinnerButton /> : 'Edit'}</button>
+                            </div>
                         </form>
-                    </div>
+                    </Form>
             }
         </>
     )

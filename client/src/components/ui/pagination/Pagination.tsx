@@ -2,15 +2,20 @@ import clsx from 'clsx';
 import { generatePaginationNumbers } from '../../../utils/generatePaginationNumbers';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { usePaginationStore } from '../../../store/pagination-store/pagination';
+import { RefreshButton } from '../refresh/RefreshButton';
+import { useUsersStore } from '../../../store/users/users';
 
 interface Props {
-    totalPages: number;
+    url: string;
 }
 
-export const Pagination = ({ totalPages }: Props) => {
+export const Pagination = ({ url }: Props) => {
 
     const { page } = useParams();
     const navigate = useNavigate()
+    const { getPagination, totalPages, data } = usePaginationStore()
+    const { isLoading } = useUsersStore()
     const location = useLocation().pathname.toString().split('/')
     const pathname = '/' + location[1] + '/' + location[2]
 
@@ -20,13 +25,14 @@ export const Pagination = ({ totalPages }: Props) => {
     const allPages = generatePaginationNumbers(currentPage, totalPages);
 
     useEffect(() => {
+        getPagination(Number(page), url)
         if (currentPage > totalPages || currentPage < 1 || isNaN(+pageString)) {
             navigate(`${pathname}/${allPages.length.toString()}`);
         }
         if (currentPage < 1 || isNaN(+pageString)) {
             navigate(pathname);
         }
-    }, [totalPages])
+    }, [currentPage, isLoading])
 
     const createPageUrl = (pageNumber: number | string) => {
 
@@ -51,9 +57,13 @@ export const Pagination = ({ totalPages }: Props) => {
     }
 
     return (
-        <div className="fade-in flex text-center justify-center mt-10 mb-32">
-            <div className="flex text-center justify-center mt-10 mb-32">
+        <div className="fade-in flex text-center justify-center">
+            <div className="flex text-center justify-center">
+                <div className='mr-4'>
+                    <RefreshButton onClick={() => getPagination(Number(page), url)} />
+                </div>
                 <nav aria-label="Page navigation example">
+
                     <ul className="inline-flex -space-x-px text-base h-10">
                         <li>
                             <Link to={createPageUrl(currentPage - 1)} className="button">Previous</Link>
@@ -69,7 +79,6 @@ export const Pagination = ({ totalPages }: Props) => {
                                             }
                                         )}>{page}</Link>
                                     </li>
-
                                 )
                             })
                         }

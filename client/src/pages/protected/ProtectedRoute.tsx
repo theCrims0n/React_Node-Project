@@ -18,8 +18,7 @@ const ProtectedRoute = () => {
 
     return (
         <>
-
-            <main className={`fade-in flex flex-col min-h-screen`} >
+            <main className={`fade-in flex flex-col min-h-screen shrink min-w-96 `} >
                 <Sidebar />
                 <Navbar />
                 {isSideMenuOpen && (

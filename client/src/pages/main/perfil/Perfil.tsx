@@ -5,6 +5,7 @@ import { Label } from "../../../components/ui/label/Label"
 import { Link } from "react-router-dom"
 import { useAuthStore } from "../../../store/auth/auth"
 import Spinner from "../../../components/ui/spinner/Spinner"
+import { Tooltip } from "react-tooltip"
 
 const Perfil = () => {
 
@@ -20,8 +21,12 @@ const Perfil = () => {
                     <Form>
                         <div className="w- full space-y-6 w-full flex flex-col gap-4">
                             <div className="w-full flex flex-col align-center">
-                                <Link to={`/users/edit/${user?.id}`} className="justify-end flex"><Pencil>Login to your account</Pencil></Link>
-                                <h5 className="text-xl font-medium text-gray-900">Your Perfil</h5>
+                                <Link to={`/users/edit/${user?.id}`} className="justify-end flex"><Pencil id='profile' className="focus:outline-none"/></Link>
+                                <Tooltip 
+                                anchorSelect="#profile" place="bottom" 
+                                content="Update your profile data"
+                                />
+                                <h5 className="text-xl font-medium text-gray-900">My Profile</h5>
                             </div>
                             <div>
                                 <Label htmlFor="email" >Your full name</Label>

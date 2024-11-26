@@ -27,7 +27,7 @@ const ProtectedRoute = () => {
                             className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30" />
                     </>
                 )}
-                <div onClick={closeSideMenu} className={`flex flex-col flex-grow`} >
+                <div onClick={closeSideMenu} className={`flex flex-col flex-grow `} >
                     <Outlet />
                 </div>
                 <Footer />

@@ -63,7 +63,7 @@ exports.getUsersById = getUsersById;
 const editUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { body } = req;
-        let { id, email, name, lastname, password, department } = body;
+        let { id, email, name, lastname, password, department, role_id } = body;
         const userByEmail = yield users_1.default.findOne({ where: { email } });
         if (userByEmail) {
             const { id: idByEmail } = userByEmail;
@@ -74,7 +74,7 @@ const editUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
         password = hashedPassword;
-        const result = yield users_1.default.update({ email, name, lastname, password, department }, { where: { id } });
+        const result = yield users_1.default.update({ email, name, lastname, password, department, role_id }, { where: { id } });
         res.json({ result });
     }
     catch (error) {

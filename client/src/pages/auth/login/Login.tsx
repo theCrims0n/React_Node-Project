@@ -98,13 +98,13 @@ const Login = () => {
 
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <div className="flex items-center">
-                        <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                        <Label htmlFor="remember-me" className="ml-3 block text-sm text-gray-800">
+                        <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-slate-300 rounded" />
+                        <Label htmlFor="remember-me" className="ml-3 block text-sm text-slate-800">
                             Remember me
                         </Label>
                     </div>
                     <div className="text-sm">
-                        <Link to={'/auth/recovery'} className="text-gray-800 hover:underline font-semibold">Forgot your password?</Link>
+                        <Link to={'/auth/recovery'} className="text-slate-800 hover:underline font-semibold">Forgot your password?</Link>
                     </div>
                 </div>
 
@@ -116,8 +116,8 @@ const Login = () => {
                     </button>
                 </div>
                 <span className="m-1 text-sm text-red-500" hidden={!errorMessage} >{errorMessage}</span>
-                <p className="text-gray-800 text-sm !mt-8 text-center">Don't have an account?
-                    <Link to={'/auth/register'} className="text-gray-800 hover:underline ml-1 whitespace-nowrap font-semibold">Register here</Link>
+                <p className="text-slate-800 text-sm !mt-8 text-center">Don't have an account?
+                    <Link to={'/auth/register'} className="text-slate-800 hover:underline ml-1 whitespace-nowrap font-semibold">Register here</Link>
                 </p>
             </form>
         </div>

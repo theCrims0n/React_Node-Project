@@ -90,12 +90,12 @@ const chartConfig: any = {
 
 export default function ChartJs() {
     return (
-        <div className="m-4 p-4 bg-white border border-gray-200 rounded-lg shadow-md font-medium">
+        <div className="m-4 p-4 bg-white border border-slate-200 rounded-lg shadow-md font-medium">
             <div className="m-4 ">
                 <h1 className="text-lg ">
                     Users Chart
                 </h1>
-                <p color="gray" className="max-w-sm font-normal text-gray-500 text-sm">
+                <p color="slate" className="max-w-sm font-normal text-slate-500 text-sm">
                     Visualize your data in a simple way using the
                     @material-tailwind/react chart plugin.
                 </p>

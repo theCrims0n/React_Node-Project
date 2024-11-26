@@ -54,7 +54,7 @@ export const editUser = async (req: Request, res: Response) => {
     try {
 
         const { body } = req
-        let { id, email, name, lastname, password, department } = body
+        let { id, email, name, lastname, password, department, role_id } = body
         const userByEmail: any = await usersSchema.findOne({ where: { email } })
 
         if (userByEmail) {
@@ -70,7 +70,7 @@ export const editUser = async (req: Request, res: Response) => {
         const hashedPassword = await bscrypt.hash(password, 10)
         password = hashedPassword
 
-        const result = await usersSchema.update({ email, name, lastname, password, department }, { where: { id } })
+        const result = await usersSchema.update({ email, name, lastname, password, department, role_id }, { where: { id } })
 
         res.json({ result })
 

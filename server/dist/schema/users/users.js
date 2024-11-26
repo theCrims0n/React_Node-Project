@@ -31,6 +31,9 @@ const usersSchema = connection_1.default.define('users', {
     },
     updatedAt: {
         type: sequelize_1.DataTypes.DATE
+    },
+    role_id: {
+        type: sequelize_1.DataTypes.INTEGER
     }
 });
 exports.default = usersSchema;

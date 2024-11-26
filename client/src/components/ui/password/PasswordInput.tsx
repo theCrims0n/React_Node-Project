@@ -94,7 +94,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
                     ></div>
                 </div>
 
-                <p id="password-strength" className="mb-2 text-sm font-medium text-foreground text-gray-800">
+                <p id="password-strength" className="mb-2 text-sm font-medium text-foreground text-slate-800">
                     {getStrengthText(strengthScore)}. Must contain:
                 </p>
 

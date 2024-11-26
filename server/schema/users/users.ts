@@ -27,8 +27,10 @@ const usersSchema = db.define('users', {
     },
     updatedAt: {
         type: DataTypes.DATE
+    },
+    role_id: {
+        type: DataTypes.INTEGER
     }
-
 });
 
 export default usersSchema

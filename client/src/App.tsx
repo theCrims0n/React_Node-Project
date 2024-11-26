@@ -35,7 +35,7 @@ const App = () => {
   }, [navigate, token, isAuthentic]);
 
   return (
-    <div className='font-normal'>
+    <div className='fade-in'>
     <AuthProvider>
       <Routes>
         <Route element={<AuthPages />}>

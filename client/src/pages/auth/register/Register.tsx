@@ -41,7 +41,7 @@ const Register = () => {
             if (result.status != 200) {
                 return
             }
-            navigate('/users/list')
+            navigate('/auth/login')
 
         } catch (error) {
             console.log(error)
@@ -55,16 +55,16 @@ const Register = () => {
     return (
 
         <div className="p-8 rounded-2xl bg-white shadow">
-            <h2 className="text-gray-800 text-center text-2xl font-medium mb-8">Welcome, Please register here! :D</h2>
+            <h2 className="text-slate-800 text-center text-2xl font-medium mb-8">Welcome, Please register here! :D</h2>
             <form onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
                 <div className="flex w-full justify-center items-center space-x-4">
                     <div className="flex items-start flex-col justify-start w-full">
-                        <Label htmlFor="name" className="text-gray-800 text-sm mb-2 block">Name</Label>
+                        <Label htmlFor="name" className="text-slate-800 text-sm mb-2 block">Name</Label>
                         <Input {...register('name', { required: 'Name is required' })} className={`${errors.name ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} placeholder="Enter Name" type="text" id="name" />
                         <span className="m-1 text-xs text-red-500" hidden={!errors.name}>{`${errors?.name?.message}`}</span>
                     </div>
                     <div className="flex items-start flex-col justify-start w-full">
-                        <Label htmlFor="lastname" className="text-gray-800 text-sm mb-2 block">Last Name</Label>
+                        <Label htmlFor="lastname" className="text-slate-800 text-sm mb-2 block">Last Name</Label>
                         <Input {...register('lastname', { required: 'Last Name is required' })} className={`${errors.lastname ? 'focus:outline-none focus:ring focus:border-2 border-rose-500' : ''}`} placeholder="Enter Last Name" type="text" id="lastname" />
                         <span className="m-1 text-xs text-red-500" hidden={!errors.lastname}>{`${errors?.lastname?.message}`}</span>
                     </div>
@@ -101,8 +101,8 @@ const Register = () => {
             </form>
 
             <div className="mt-4 text-center">
-                <span className="text-gray-800 text-sm !mt-8 text-center">Already have an account? </span>
-                <Link to={'/auth/login'} className="text-gray-800 hover:underline ml-1 whitespace-nowrap font-semibold">Login</Link>
+                <span className="text-slate-800 text-sm !mt-8 text-center">Already have an account? </span>
+                <Link to={'/auth/login'} className="text-slate-800 hover:underline ml-1 whitespace-nowrap font-semibold">Login</Link>
             </div>
         </div>
 

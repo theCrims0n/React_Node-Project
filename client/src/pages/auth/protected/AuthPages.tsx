@@ -12,7 +12,7 @@ export default function AuthPages() {
     }
 
     return (
-            <div className="min-h-screen flex items-center">
+            <div className="fade-in min-h-screen flex items-center">
                 <div className="flex h-full w-full flex-wrap items-center justify-center align-center lg:justify-stretch ">
                     <motion.div className="flex justify-end mb-1 md:w-8/12 md:h-40 lg:h-96 lg:w-6/12 bg-transparent" initial={{ opacity: 0 }} animate={{
                         opacity: 1,

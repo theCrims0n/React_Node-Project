@@ -2,11 +2,13 @@ import { create } from 'zustand'
 import { Users } from '../../interface/users/users';
 import axios from '../../axios/axios';
 import { toast } from 'sonner';
+import { Roles } from '../../interface/roles/roles';
 
 interface State {
     isLoading: boolean;
     user: Users[],
     users: Users[],
+    roles: Roles[],
     getUsers: () => void;
     getUserById: (id: string) => void;
     deleteUser: (id: number) => void;
@@ -23,6 +25,7 @@ export const useUsersStore = create<State>()(
         isLoading: false,
         user: [],
         users: [],
+        roles: [],
         errorMessage: '',
         getUsers: async () => {
             try {
@@ -39,7 +42,9 @@ export const useUsersStore = create<State>()(
             try {
                 set({ isLoading: true, user: [] })
                 const result = await axios.get(`/api/users/${id}`)
-                set({ isLoading: false, user: [result.data.result] })
+
+                console.log(result)
+                set({ isLoading: false, user: [result.data.result], roles: result.data.roles })
 
             } catch (error: any) {
                 console.log(error)

@@ -15,7 +15,9 @@ import AuthPages from './pages/auth/protected/AuthPages';
 import EditUser from './pages/users/edit/Edit';
 import ToasterIU from './components/ui/toaster/Toaster';
 import InvitationsList from './pages/invitations/list/List';
-import Perfil from './pages/main/perfil/Perfil';
+import AdminRoute from './pages/admin/AdminRoute';
+import Profile from './pages/main/profile/Profile';
+import ProfileEditUser from './pages/main/profile/edit/Edit';
 
 const App = () => {
 
@@ -36,25 +38,28 @@ const App = () => {
 
   return (
     <div className='fade-in'>
-    <AuthProvider>
-      <Routes>
-        <Route element={<AuthPages />}>
-          <Route path='/auth/login' element={<Login />} />
-          <Route path='/auth/register' element={<Register />} />
-          <Route path='/auth/recovery' element={<Recovery />} />
-        </Route>
-        <Route element={<ProtectedRoute />} >
-          <Route path='/' element={<Home />} />
-          <Route path='/users/list/:page' element={<UsersList />} />
-          <Route path='/invitations/list/:page' element={<InvitationsList />} />
-          <Route path='/users/register' element={<RegisterUser />} />
-          <Route path='/users/edit/:id' element={<EditUser />} />
-          <Route path='/perfil' element={<Perfil />} />
-        </Route>
-      </Routes>
-      <ToasterIU />
-    </AuthProvider>
-    </div>
+      <AuthProvider>
+        <Routes>
+          <Route element={<AuthPages />}>
+            <Route path='/auth/login' element={<Login />} />
+            <Route path='/auth/register' element={<Register />} />
+            <Route path='/auth/recovery' element={<Recovery />} />
+          </Route>
+          <Route element={<ProtectedRoute />} >
+            <Route path='/' element={<Home />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/edit/' element={<ProfileEditUser />} />
+            <Route element={<AdminRoute />} >
+              <Route path='/users/list/:page' element={<UsersList />} />
+              <Route path='/invitations/list/:page' element={<InvitationsList />} />
+              <Route path='/users/register' element={<RegisterUser />} />
+              <Route path='/users/edit/:id' element={<EditUser />} />
+            </Route>
+          </Route>
+        </Routes>
+        <ToasterIU />
+      </AuthProvider>
+    </div >
   );
 }
 

@@ -16,6 +16,7 @@ exports.deteleteUser = exports.editUser = exports.getUsersById = exports.getUser
 const users_1 = __importDefault(require("../../schema/users/users"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const roles_1 = __importDefault(require("../../schema/roles/roles"));
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield users_1.default.findAll();
@@ -49,13 +50,15 @@ const getUsersById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const { id } = req.params;
         const result = yield users_1.default.findByPk(id);
+        const roles = (yield roles_1.default.findAll()) || [];
         if (!result) {
             res.json({ mssge: 'Error' });
             return;
         }
-        res.json({ result: result });
+        res.json({ result: result, roles: roles });
     }
     catch (error) {
+        console.log(error);
         res.json({ mssge: error });
     }
 });

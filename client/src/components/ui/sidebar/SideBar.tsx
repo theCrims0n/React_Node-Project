@@ -22,7 +22,7 @@ export const Sidebar = () => {
                 <ChevronLeft
                     id='closemenu'
                     size={25} color="gray"
-                    className="absolute top-8 right-4 cursor-pointer"
+                    className="absolute top-8 right-4 cursor-pointer focus:outline-none"
                     onClick={() => closeSideMenu()}
                 />
                 <Tooltip

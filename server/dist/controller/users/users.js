@@ -64,7 +64,6 @@ const editUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { body } = req;
         let { id, email, name, lastname, password, department } = body;
-        console.log(email);
         const userByEmail = yield users_1.default.findOne({ where: { email } });
         if (userByEmail) {
             const { id: idByEmail } = userByEmail;

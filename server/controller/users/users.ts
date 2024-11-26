@@ -55,7 +55,6 @@ export const editUser = async (req: Request, res: Response) => {
 
         const { body } = req
         let { id, email, name, lastname, password, department } = body
-        console.log(email)
         const userByEmail: any = await usersSchema.findOne({ where: { email } })
 
         if (userByEmail) {

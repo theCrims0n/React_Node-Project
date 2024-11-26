@@ -1,10 +1,7 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-
 import { Users } from '../../interface/users/users';
 import axios from '../../axios/axios';
 import { toast } from 'sonner';
-import { usePaginationStore } from '../pagination-store/pagination';
 
 interface State {
     isLoading: boolean;
@@ -18,6 +15,7 @@ interface State {
     errorMessage: string;
     clear: () => void;
 }
+
 
 export const useUsersStore = create<State>()(
     (set) => ({
@@ -72,6 +70,7 @@ export const useUsersStore = create<State>()(
             } catch (error: any) {
                 console.log(error)
                 const { mssge } = error.response.data
+                const { status } = error
                 set({ isLoading: false, errorMessage: mssge })
             }
 

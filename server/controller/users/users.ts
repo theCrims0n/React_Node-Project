@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import usersSchema from "../../schema/users/users"
 import jwt from 'jsonwebtoken'
 import bscrypt from 'bcryptjs'
+import rolesSchema from "../../schema/roles/roles"
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
@@ -39,13 +40,15 @@ export const getUsersById = async (req: Request, res: Response) => {
 
         const { id } = req.params
         const result: any = await usersSchema.findByPk(id)
+        const roles = await rolesSchema.findAll() || []
         if (!result) {
             res.json({ mssge: 'Error' })
             return
         }
-        res.json({ result: result })
+        res.json({ result: result, roles: roles })
 
     } catch (error) {
+        console.log(error)
         res.json({ mssge: error })
     }
 }

@@ -3,13 +3,11 @@ import { deteleteUser, editUser, getUsers, getUsersById, getUsersPagination } fr
 
 const { validateJWT } = require('../../helper/jwt')
 const router = Router()
-if (validateJWT) {
-    router.get('/', validateJWT, getUsers)
-    router.post('/pagination', validateJWT, getUsersPagination)
-    router.get('/:id', validateJWT, getUsersById)
-    router.put('/', validateJWT, editUser)
-    router.delete('/:id', validateJWT, deteleteUser)
-}
+router.get('/', getUsers)
+router.post('/pagination', getUsersPagination)
+router.get('/:id', getUsersById)
+router.put('/', editUser)
+router.delete('/:id', deteleteUser)
 
 
 export default router

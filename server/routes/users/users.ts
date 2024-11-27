@@ -3,7 +3,7 @@ import { deteleteUser, editUser, getUsers, getUsersById, getUsersPagination } fr
 
 const { validateJWT } = require('../../helper/jwt')
 const router = Router()
-router.get('/', validateJWT, getUsers)
+router.get('/',  getUsers)
 router.post('/pagination', validateJWT, getUsersPagination)
 router.get('/:id', validateJWT, getUsersById)
 router.put('/', validateJWT, editUser)

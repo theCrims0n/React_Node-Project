@@ -1,18 +1,15 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "dist/app.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["dist/**"]
-      }
-    }
-  ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "dist/app.js"
+      "src": "/api/(.*)",
+      "dest": "app.ts"
     }
-  ]
+  ],
+  "functions": {
+    "app.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
 }

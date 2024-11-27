@@ -41,7 +41,8 @@ class Server {
     }
     middlewares() {
         this.app.use(express_1.default.json());
-        this.app.use((0, cors_1.default)({ credentials: true, origin: 'https://react-node-project-kappa.vercel.app' }));
+        //this.app.use(cors({ credentials: true, origin: 'https://react-node-project-client.vercel.app' }))
+        this.app.use((0, cors_1.default)({ credentials: true, origin: 'http://localhost:3000' }));
         this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use(express_1.default.static('public'));
         this.app.use((0, cookie_parser_1.default)());

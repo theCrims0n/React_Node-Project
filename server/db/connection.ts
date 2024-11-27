@@ -1,13 +1,21 @@
 import { Sequelize } from 'sequelize'
 
-const host = process.env.NODE_ENV == 'production' ? process.env.AWS_LINK : 'localhost'
-const port = process.env.NODE_ENV == 'production' ? process.env.AWS_PORT : 8080
-const key = process.env.NODE_ENV == 'production' ? process.env.AWS_SECRET_KEY_ : 'root32'
+const awshost = 'aws-server-instance-1.cjqsk28esgj3.us-east-2.rds.amazonaws.com'
+const awsport = 5432
+const awskey = 'Michelle2019'
 
-const db = new Sequelize('nextia', 'postgres', key, {
-    host: host,
-    port: Number(port),
-    dialect: 'postgres'
+const localhost = 'localhost'
+const localport = 8080
+const localkey = 'root32'
+
+const db = new Sequelize('nextia', 'postgres', awskey, {
+    host: awshost,
+    port: awsport,
+    dialect: 'postgres',
+    logging: console.log,
+    dialectOptions: {
+        ssl: { rejectUnauthorized: false },
+    },
 })
 
 export default db;

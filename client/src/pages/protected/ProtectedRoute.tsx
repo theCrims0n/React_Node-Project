@@ -1,16 +1,23 @@
-import { Navigate, Outlet } from "react-router-dom"
+import { Navigate, Outlet, useNavigate } from "react-router-dom"
 import Navbar from "../../components/ui/navbar/Navbar"
 import Footer from "../../components/ui/footer/Footer"
 import { useAuthStore } from "../../store/auth/auth"
 import { Sidebar } from "../../components/ui/sidebar/SideBar"
 import { useUIStore } from "../../store/ui/sidebar"
 import Spinner from "../../components/ui/spinner/Spinner"
+import { useEffect } from "react"
 
 const ProtectedRoute = () => {
 
     const { isAuthentic } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        if (!isAuthentic) {
+            navigate('/auth/login')
+        }
+    }, [isAuthentic])
 
     return (
         <>

@@ -65,6 +65,6 @@
     "@types/crypto-js": "^4.2.2",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.9.1",
-    "tailwindcss": "^3.4.15",
+    "tailwindcss": "^3.4.15"
   }
 }

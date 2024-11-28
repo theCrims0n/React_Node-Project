@@ -15,7 +15,6 @@ const db = new sequelize_1.Sequelize(bdname, username, password, {
     logging: false,
     dialectOptions: {
         ssl: { rejectUnauthorized: false, require: true },
-        sslrootcert: 'rds-ca-rsa2048-g1'
     }
 });
 exports.default = db;

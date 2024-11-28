@@ -11,4 +11,4 @@ export default axios.create({
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Credentials': false
     }, withCredentials: true
-})
+}).defaults.withCredentials = true

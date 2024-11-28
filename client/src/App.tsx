@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import './output.css';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './pages/protected/ProtectedRoute';
@@ -28,6 +28,12 @@ const App = () => {
   useEffect(() => {
     verify()
   }, [token, isAuthentic]);
+
+  if (!token || !isAuthentic) {
+    return (
+      <Navigate to={'/auth/login'} />
+    )
+  }
 
   return (
     <div className='fade-in'>

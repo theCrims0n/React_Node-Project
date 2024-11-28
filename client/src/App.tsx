@@ -34,7 +34,7 @@ const App = () => {
       clear()
     }
 
-  }, [navigate, token, isAuthentic]);
+  }, [token, isAuthentic]);
 
   return (
     <div className='fade-in'>

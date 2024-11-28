@@ -25,7 +25,9 @@ const App = () => {
   const navigate = useNavigate()
   const { isAuthentic, clear, verify } = useAuthStore()
 
-
+  useEffect(() => {
+    verify()
+  }, [token, isAuthentic]);
 
   return (
     <div className='fade-in'>

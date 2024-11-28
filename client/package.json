@@ -60,6 +60,11 @@
     "typescript": "^5.6.3"
   },
   "overrides": {
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "@types/crypto-js": "^4.2.2",
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^22.9.1",
+    "tailwindcss": "^3.4.15",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

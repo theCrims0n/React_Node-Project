@@ -24,7 +24,9 @@ const Login = () => {
             if (result.status != 200) {
                 return
             }
-            navigate('/')
+            setTimeout(() => {
+                navigate('/')
+            }, 500);
         } catch (error) {
             console.log(error)
         }

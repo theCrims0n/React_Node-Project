@@ -32,7 +32,7 @@ const App = () => {
       navigate("/auth/login");
       clear()
     }
-  }, [isAuthentic]);
+  }, [navigate, isAuthentic]);
 
   return (
     <div className='fade-in'>

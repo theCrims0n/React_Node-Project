@@ -41,8 +41,8 @@ class Server {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)({
             credentials: true,
-            //origin: 'https://react-node-project-client.vercel.app' 
-            origin: 'http://localhost:3000'
+            origin: '*'
+            //origin: 'http://localhost:3000'
         }));
         this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use(express_1.default.static('public'));

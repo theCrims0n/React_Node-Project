@@ -1,5 +1,7 @@
 import axios from "axios";
 
+axios.defaults.withCredentials = true
+
 export default axios.create({
     baseURL: 'https://nodejs-serverless-function-express-al44.onrender.com',
     //baseURL: 'http://localhost:3001',

@@ -46,8 +46,11 @@ export const useAuthStore = create<AuthStore>()(
                 try {
                     set({ isLoading: true })
                     const result = await axios.get(`/api/auth/logout/`)
-                    Cookies.remove('token')
-                    set({ isAuthentic: result.status == 200 ? false : true, isLoading: false })
+                    if (result.status == 200) {
+                        Cookies.remove('token')
+                        set({ isAuthentic: false, isLoading: false })
+                        return
+                    }
                 } catch (error) { }
             },
             verify: async () => {

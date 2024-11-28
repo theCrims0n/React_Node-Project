@@ -5,19 +5,22 @@ import { useAuthStore } from "../../store/auth/auth"
 import { Sidebar } from "../../components/ui/sidebar/SideBar"
 import { useUIStore } from "../../store/ui/sidebar"
 import Spinner from "../../components/ui/spinner/Spinner"
+import { useEffect } from "react"
 
 const ProtectedRoute = () => {
 
     const { isAuthentic } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
 
-    setTimeout(() => {
-        if (!isAuthentic) {
-            return (
-                <Navigate to={'/auth/login'} />
-            )
-        }
-    }, 500);
+    useEffect(() => {
+        setTimeout(() => {
+            if (!isAuthentic) {
+                return (
+                    <Navigate to={'/auth/login'} />
+                )
+            }
+        }, 500);
+    }, [isAuthentic])   
 
     return (
         <>

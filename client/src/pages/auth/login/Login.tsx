@@ -18,22 +18,20 @@ const Login = () => {
 
     const [state, setState] = useState(false)
 
-    const onSubmit = (body: any) => {
+    const onSubmit = async (body: any) => {
         try {
-            login(body)
+            const result: any = await login(body)
+            if (result.status != 200) {
+                return
+            }
+            navigate('/')
         } catch (error) {
             console.log(error)
         }
-        finally {
-
-        }
     }
+
     useEffect(() => {
-        if (isSubmitSuccessful && isAuthentic) {
-            navigate('/')
-        } else {
-            clear()
-        }
+        clear()
     }, [])
 
     return (

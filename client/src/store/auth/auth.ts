@@ -34,7 +34,7 @@ export const useAuthStore = create<AuthStore>()(
                     set({ isLoading: true, isAuthentic: false, errorMessage: '' })
                     const result = await axios.post(`/api/auth/login/`, body)
                     const { user, token } = result.data
-                    //Cookies.set('token', token)
+                    Cookies.set('token', token)
                     set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
                 } catch (error: any) {
                     const { mssge } = error.response.data
@@ -46,6 +46,7 @@ export const useAuthStore = create<AuthStore>()(
                 try {
                     set({ isLoading: true })
                     const result = await axios.get(`/api/auth/logout/`)
+                    Cookies.remove('token')
                     set({ isAuthentic: result.status == 200 ? false : true, isLoading: false })
                 } catch (error) { }
             },
@@ -54,6 +55,7 @@ export const useAuthStore = create<AuthStore>()(
                     set({ isLoading: true })
                     const result = await axios.get(`/api/auth/verify`)
                     if (result.status != 200) {
+                        Cookies.remove('token')
                         set({ isAuthentic: false, isLoading: false })
                         return
                     }
@@ -61,6 +63,7 @@ export const useAuthStore = create<AuthStore>()(
                     return result
                 } catch (error) {
                     console.log(error)
+                    Cookies.remove('token')
                     toast.error('Unauthenticated user')
                     set({ isAuthentic: false, isLoading: false })
                 }

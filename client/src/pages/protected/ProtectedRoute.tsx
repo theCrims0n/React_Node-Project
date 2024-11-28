@@ -12,19 +12,15 @@ const ProtectedRoute = () => {
     const { isAuthentic } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (!isAuthentic) {
-                return (
-                    <Navigate to={'/auth/login'} />
-                )
-            }
-        }, 500);
-    }, [isAuthentic])   
+    if (!isAuthentic) {
+        return (
+            <Navigate to={'/auth/login'} />
+        )
+    }
 
     return (
         <>
-            <main className={`fade-in flex flex-col min-h-screen shrink min-w-96 `} >
+            <main key={Number(isAuthentic)} className={`fade-in flex flex-col min-h-screen shrink min-w-96 `} >
                 {isAuthentic ?
                     <>
                         <Sidebar />

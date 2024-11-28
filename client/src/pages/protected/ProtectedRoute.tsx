@@ -11,11 +11,13 @@ const ProtectedRoute = () => {
     const { isAuthentic } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
 
-    if (!isAuthentic) {
-        return (
-            <Navigate to={'/auth/login'} />
-        )
-    }
+    setTimeout(() => {
+        if (!isAuthentic) {
+            return (
+                <Navigate to={'/auth/login'} />
+            )
+        }
+    }, 500);
 
     return (
         <>

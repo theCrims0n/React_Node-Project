@@ -34,7 +34,7 @@ class Server {
         this.app.use(express.json())
         this.app.use(cors({
             credentials: true, 
-            origin: 'https://react-node-project-client.vercel.app' 
+            origin: '*' 
             //origin: 'http://localhost:3000'
         }))
         this.app.use(express.urlencoded({ extended: true }))

@@ -23,19 +23,19 @@ class Server {
     }
 
     async dbConnection() {
-        try {
-            await db.authenticate();
+        await db.authenticate().then(() => {
             console.log('DB is running correctly')
-
-        } catch (error: any) {
-            throw new Error(error)
-        }
+        }).catch((err) => {
+            console.log(err)
+        });
     }
 
     middlewares() {
         this.app.use(express.json())
-        //this.app.use(cors({ credentials: true, origin: 'https://react-node-project-client.vercel.app' }))
-        this.app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+        this.app.use(cors({
+            credentials: true, origin: process.env.NODE_ENV == 'production' ?
+                'https://react-node-project-client.vercel.app' : 'http://localhost:3000'
+        }))
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(express.static('public'))
         this.app.use(cookieParser())

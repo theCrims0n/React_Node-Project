@@ -30,19 +30,19 @@ class Server {
     }
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield connection_1.default.authenticate();
+            yield connection_1.default.authenticate().then(() => {
                 console.log('DB is running correctly');
-            }
-            catch (error) {
-                throw new Error(error);
-            }
+            }).catch((err) => {
+                console.log(err);
+            });
         });
     }
     middlewares() {
         this.app.use(express_1.default.json());
-        //this.app.use(cors({ credentials: true, origin: 'https://react-node-project-client.vercel.app' }))
-        this.app.use((0, cors_1.default)({ credentials: true, origin: 'http://localhost:3000' }));
+        this.app.use((0, cors_1.default)({
+            credentials: true, origin: process.env.NODE_ENV == 'production' ?
+                'https://react-node-project-client.vercel.app' : 'http://localhost:3000'
+        }));
         this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use(express_1.default.static('public'));
         this.app.use((0, cookie_parser_1.default)());

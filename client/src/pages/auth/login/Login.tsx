@@ -20,7 +20,7 @@ const Login = () => {
 
     const onSubmit = async (body: any) => {
         try {
-           login(body)
+           await login(body)
         } catch (error) {
             console.log(error)
         }

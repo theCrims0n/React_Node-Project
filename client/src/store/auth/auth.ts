@@ -31,7 +31,7 @@ export const useAuthStore = create<AuthStore>()(
             login: async (body) => {
                 try {
                     set({ isLoading: true, isAuthentic: false, errorMessage: '' })
-                    const result = await axios.post(`/api/auth/login/`, body, { withCredentials: true })
+                    const result = await axios.post(`/api/auth/login/`, body)
                     const { user, token } = result.data
                     set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
                 } catch (error: any) {

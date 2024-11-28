@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware'
 import { Users } from '../../interface/users/users';
 import axios from '../../axios/axios';
 import { toast } from 'sonner';
+import Cookies from 'js-cookie';
 
 interface AuthStore {
     isLogged: boolean;
@@ -33,6 +34,7 @@ export const useAuthStore = create<AuthStore>()(
                     set({ isLoading: true, isAuthentic: false, errorMessage: '' })
                     const result = await axios.post(`/api/auth/login/`, body)
                     const { user, token } = result.data
+                    Cookies.set('token', token)
                     set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
                 } catch (error: any) {
                     const { mssge } = error.response.data

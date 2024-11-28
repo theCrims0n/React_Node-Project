@@ -27,7 +27,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        //clear()
+        clear()
     }, [])
 
     return (

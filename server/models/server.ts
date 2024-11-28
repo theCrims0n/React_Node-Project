@@ -33,8 +33,9 @@ class Server {
     middlewares() {
         this.app.use(express.json())
         this.app.use(cors({
-            credentials: true, origin: process.env.NODE_ENV == 'production' ?
-                'https://react-node-project-client.vercel.app' : 'http://localhost:3000'
+            credentials: true, 
+            origin: 'https://react-node-project-client.vercel.app' 
+            //origin: 'http://localhost:3000'
         }))
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(express.static('public'))

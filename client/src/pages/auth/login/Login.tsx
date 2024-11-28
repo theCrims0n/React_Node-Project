@@ -20,20 +20,14 @@ const Login = () => {
 
     const onSubmit = async (body: any) => {
         try {
-            const result: any = await login(body)
-            if (result.status != 200) {
-                return
-            }
-            setTimeout(() => {
-                navigate('/')
-            }, 500);
+           login(body)
         } catch (error) {
             console.log(error)
         }
     }
 
     useEffect(() => {
-        clear()
+        //clear()
     }, [])
 
     return (

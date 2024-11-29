@@ -10,20 +10,9 @@ import Cookies from "js-cookie"
 
 const ProtectedRoute = () => {
 
-    const { isAuthentic, verify } = useAuthStore()
+    const { isAuthentic } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
-    const token = Cookies.get('token')
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        verify()
-    }, [token, isAuthentic])
-
-    if (!isAuthentic) {
-        navigate('/auth/login')
-        window.location.reload()
-    }
-
+   
     return (
         <>
             <main className={`fade-in flex flex-col min-h-screen shrink min-w-96 `} >

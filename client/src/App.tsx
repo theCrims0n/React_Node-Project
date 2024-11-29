@@ -20,7 +20,20 @@ import Profile from './pages/main/profile/Profile';
 import ProfileEditUser from './pages/main/profile/edit/Edit';
 
 const App = () => {
-  
+
+  const { isAuthentic, verify } = useAuthStore()
+  const token = Cookies.get('token')
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    verify()
+  }, [token, isAuthentic])
+
+  if (!isAuthentic) {
+    navigate('/auth/login')
+    window.location.reload()
+  }
+
   return (
     <div className='fade-in'>
       <AuthProvider>

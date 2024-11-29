@@ -8,7 +8,7 @@ import Spinner from "../../components/ui/spinner/Spinner"
 
 const ProtectedRoute = () => {
 
-    const { isAuthentic } = useAuthStore()
+    const { isAuthentic, isLoading } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
 
     if (!isAuthentic) {
@@ -20,7 +20,7 @@ const ProtectedRoute = () => {
     return (
         <>
             <main key={Number(isAuthentic)} className={`fade-in flex flex-col min-h-screen shrink min-w-96 `} >
-                {isAuthentic ?
+                {isAuthentic || isLoading ?
                     <>
                         <Sidebar />
                         <Navbar />

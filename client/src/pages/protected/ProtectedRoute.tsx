@@ -14,6 +14,9 @@ const ProtectedRoute = () => {
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
     const token = Cookies.get('token')
 
+    useEffect(() => {
+        verify()
+    }, [token, isAuthentic])
 
     if (!isAuthentic) {
         return (

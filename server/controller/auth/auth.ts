@@ -119,7 +119,7 @@ export const recover = async (req: Request, res: Response) => {
 export const logout = async (req: Request, res: Response) => {
     try {
         res.clearCookie('token').status(200).json({ mssge: 'Sucessfully logged out' })
-        res.end()
+
     } catch (error) {
         res.status(500).json({ mssge: error })
 

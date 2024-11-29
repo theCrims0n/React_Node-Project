@@ -35,7 +35,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = yield (0, jwt_1.createJWT)(id, name);
         res.cookie("token", token, {
             sameSite: 'none',
-            httpOnly: true,
+            httpOnly: false,
             secure: true,
             path: '/'
         }).json({ user, token });
@@ -120,7 +120,6 @@ exports.recover = recover;
 const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         res.clearCookie('token').status(200).json({ mssge: 'Sucessfully logged out' });
-        res.end();
     }
     catch (error) {
         res.status(500).json({ mssge: error });

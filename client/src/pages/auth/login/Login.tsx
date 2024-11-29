@@ -10,7 +10,7 @@ import { motion } from 'framer-motion'
 
 const Login = () => {
 
-    const { register, handleSubmit, formState: { errors, isSubmitSuccessful } } = useForm()
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
 
     const { login, token, isAuthentic, isLogged, isLoading, errorMessage, clear } = useAuthStore()
 
@@ -20,11 +20,7 @@ const Login = () => {
 
     const onSubmit = async (body: any) => {
         try {
-            const result: any = await login(body)
-            if (result.status != 200) {
-                return
-            }
-            navigate('/')
+           await login(body)
         } catch (error) {
             console.log(error)
         }
@@ -107,8 +103,8 @@ const Login = () => {
                 </div>
 
                 <div className="!mt-8">
-                    <button disabled={isLoading} type="submit" className="w-full button">
-                        {isLoading ?
+                    <button disabled={isSubmitting} type="submit" className="w-full button">
+                        {isSubmitting ?
                             <SpinnerButton />
                             : 'Log In'}
                     </button>

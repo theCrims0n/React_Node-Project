@@ -78,8 +78,8 @@ const Recovery = () => {
                                 <Link to={'/auth/login'}><button className="buttonCancel">Cancel</button></Link>
                             </div>
                             <div className="pl-2 w-full">
-                                <button disabled={isLoading} type="submit" className="w-full button">
-                                    {isLoading ? <SpinnerButton /> : 'Send new password'}
+                                <button disabled={isSubmitting} type="submit" className="w-full button">
+                                    {isSubmitting ? <SpinnerButton /> : 'Send new password'}
                                 </button>
                             </div>
                         </div>

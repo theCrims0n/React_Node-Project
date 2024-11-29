@@ -31,7 +31,8 @@ export const login = async (req: Request, res: Response) => {
             sameSite: 'none',
             httpOnly: true,
             secure: process.env.NODE_ENV == 'production' ? true : false,
-        }).json({ user, token })
+        })
+        res.json({ user, token })
 
     } catch (error) {
         console.log(error)

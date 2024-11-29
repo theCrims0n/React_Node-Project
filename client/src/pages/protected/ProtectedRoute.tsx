@@ -20,7 +20,7 @@ const ProtectedRoute = () => {
     return (
         <>
             <main key={Number(isAuthentic)} className={`fade-in flex flex-col min-h-screen shrink min-w-96 `} >
-                {isAuthentic || isLoading ?
+                {isAuthentic || !isLoading ?
                     <>
                         <Sidebar />
                         <Navbar />

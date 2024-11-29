@@ -28,7 +28,10 @@ export const login = async (req: Request, res: Response) => {
         const token: any = await createJWT(id, name)
 
         res.cookie("token", token, {
+            domain: 'https://react-node-project-1-my5f.onrender.com',
+            sameSite: 'none',
             httpOnly: true,
+            secure: true,
         }).json({ user, token })
 
     } catch (error) {

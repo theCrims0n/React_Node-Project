@@ -28,9 +28,10 @@ export const login = async (req: Request, res: Response) => {
         const token: any = await createJWT(id, name)
 
         res.cookie("token", token, {
+            domain: 'nodeproject.com',
             sameSite: 'none',
-            httpOnly: false,
-            secure: true,
+            httpOnly: true,
+            secure: process.env.NODE_ENV == 'production' ? true : false,
         }).json({ user, token })
 
     } catch (error) {

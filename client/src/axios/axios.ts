@@ -6,7 +6,6 @@ export default axios.create({
     baseURL: 'https://react-node-project-rqif.onrender.com',
     //baseURL: 'http://localhost:3001',
     headers: {
-        'Cookie': 'auth_token=',
         'Access-Control-Allow-Origin': 'https://react-node-project-1-my5f.onrender.com',
         //'Access-Control-Allow-Origin': 'http://localhost:3000',
         'Access-Control-Max-Age': '1800',

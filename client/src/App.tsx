@@ -26,15 +26,14 @@ const App = () => {
   const { isAuthentic, clear, verify } = useAuthStore()
 
   useEffect(() => {
-    if (token && isAuthentic) {
+    if (token) {
       verify()
     }
-    if (token == null && isAuthentic) {
+    else {
       navigate("/auth/login");
       clear()
     }
-
-  }, [navigate, token, isAuthentic]);
+  }, [navigate, token]);
 
   return (
     <div className='fade-in'>

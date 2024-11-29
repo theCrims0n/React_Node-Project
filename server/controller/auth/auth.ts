@@ -25,14 +25,16 @@ export const login = async (req: Request, res: Response) => {
             return
         }
 
-        const token: any = await createJWT(id, name)
+        await createJWT(id, name).then((result: any) => {
 
-        res.cookie("token", token, {
-            sameSite: 'none',
-            httpOnly: true,
-            secure: process.env.NODE_ENV == 'production' ? true : false,
+            const { token } = result
+            res.cookie("token", token, {
+                sameSite: 'none',
+                httpOnly: true,
+                secure: process.env.NODE_ENV == 'production' ? true : false,
+            })
+            res.json({ user, token })
         })
-        res.json({ user, token })
 
     } catch (error) {
         console.log(error)

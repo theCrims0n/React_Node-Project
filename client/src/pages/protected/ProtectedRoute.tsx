@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom"
+import { Navigate, Outlet, useNavigate } from "react-router-dom"
 import Navbar from "../../components/ui/navbar/Navbar"
 import Footer from "../../components/ui/footer/Footer"
 import { useAuthStore } from "../../store/auth/auth"
@@ -13,15 +13,15 @@ const ProtectedRoute = () => {
     const { isAuthentic, verify } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
     const token = Cookies.get('token')
+    const navigate = useNavigate()
 
     useEffect(() => {
         verify()
     }, [token, isAuthentic])
 
     if (!isAuthentic) {
-        return (
-            <Navigate to={'/auth/login'} />
-        )
+        navigate('/auth/login')
+        window.location.reload()
     }
 
     return (

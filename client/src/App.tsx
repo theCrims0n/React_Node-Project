@@ -21,18 +21,6 @@ import ProfileEditUser from './pages/main/profile/edit/Edit';
 
 const App = () => {
   
-  const token = Cookies.get('token')
-  const navigate = useNavigate()
-  const { isAuthentic, clear, verify } = useAuthStore()
-
-  useEffect(() => {
-    verify()
-    if (!isAuthentic || !token) {
-      navigate("/auth/login");
-      clear()
-    }
-  }, [navigate]);
-
   return (
     <div className='fade-in'>
       <AuthProvider>

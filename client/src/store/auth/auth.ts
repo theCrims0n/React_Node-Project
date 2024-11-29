@@ -33,7 +33,6 @@ export const useAuthStore = create<AuthStore>()(
                 try {
                     set({ isLoading: true, isAuthentic: false, errorMessage: '' })
                     const result = await axios.post(`/api/auth/login/`, body)
-                    console.log(result)
                     const { user, token } = result.data
                     set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
                     return result;

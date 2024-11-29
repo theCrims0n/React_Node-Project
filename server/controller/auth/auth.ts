@@ -31,6 +31,7 @@ export const login = async (req: Request, res: Response) => {
             sameSite: 'none',
             httpOnly: true,
             secure: true,
+            path: '/'
         }).json({ user, token })
 
     } catch (error) {

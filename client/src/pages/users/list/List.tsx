@@ -1,11 +1,11 @@
 import { useState } from "react"
-import Spinner from "../../../components/ui/spinner/Spinner"
 import { Link } from "react-router-dom"
 import { Pencil, Trash2 } from "lucide-react"
 import { Pagination } from "../../../components/ui/pagination/Pagination"
 import { DialogModal } from "../../../components/ui/dialog/Dialog"
 import { useModalStore } from "../../../store/ui/modal"
 import { usePaginationStore } from "../../../store/pagination-store/pagination"
+import SpinnerCard from "../../../components/ui/spinner/Spinner-Card"
 
 const UsersList = () => {
 
@@ -16,18 +16,18 @@ const UsersList = () => {
     return (
         <div className="flex flex-col">
             <div className="min-h-96">
-                {
-                    isLoadingPagination
-                        ?
 
-                        <Spinner />
-                        :
-                        <>
-                            <DialogModal value={idDelete} title="Delete user" content="Are you sure you want to delete this user? All of its data will be permanently removed.
+                <DialogModal value={idDelete} title="Delete user" content="Are you sure you want to delete this user? All of its data will be permanently removed.
                                                 This action cannot be undone." />
-                            <Link to={'/users/register'}><button className="m-8 button">Create new user</button></Link>
-                            <div className="min-h-96 m-10 flex flex-col overflow-auto text-slate-700 bg-white shadow-md rounded-xl bg-clip-border">
-                                <table className="w-full text-left table-auto min-w-max ">
+                <Link to={'/users/register'}><button className="m-8 button">Create new user</button></Link>
+                <div className="justify-center min-h-96 m-10 flex flex-col overflow-auto text-slate-700 bg-white shadow-md rounded-xl bg-clip-border">
+                    <table className="w-full text-left table-auto min-w-max">
+                        {
+                            isLoadingPagination
+                                ?
+                                <SpinnerCard />
+                                :
+                                <>
                                     <thead className="font-medium">
                                         <tr>
                                             <th className="p-4 border-b border-blue-slate-100 bg-blue-slate-50">
@@ -97,15 +97,15 @@ const UsersList = () => {
                                             })
                                         }
                                     </tbody>
-                                </table>
-                            </div>
-                        </ >
-                }
+                                </>}
+                    </table>
+                </div>
             </div>
             <div className="flex flex-wrap justify-center mt-1">
                 <Pagination url={'/api/users'} />
             </div>
-        </div>)
+        </div>
+    )
 }
 
 export default UsersList

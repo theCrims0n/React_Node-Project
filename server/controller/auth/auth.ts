@@ -30,7 +30,7 @@ export const login = async (req: Request, res: Response) => {
         res.cookie("token", token, {
             sameSite: 'none',
             httpOnly: true,
-            secure: true,
+            secure: process.env.NODE_ENV == 'production' ? true : false,
         }).json({ user, token })
 
     } catch (error) {

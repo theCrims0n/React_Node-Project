@@ -40,8 +40,8 @@ class Server {
     middlewares() {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)({ credentials: true,
-            //origin: 'https://react-node-project-1-my5f.onrender.com' 
-            origin: 'https://react-node-project-omega.vercel.app'
+            origin: 'https://react-node-project-1-my5f.onrender.com'
+            //origin:'https://react-node-project-omega.vercel.app'
         }));
         this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use(express_1.default.static('public'));

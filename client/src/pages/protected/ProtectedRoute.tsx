@@ -13,11 +13,7 @@ const ProtectedRoute = () => {
     const { isAuthentic, verify } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
     const token = Cookies.get('token')
-    console.log(isAuthentic)
 
-    useEffect(() => {
-        verify()
-    }, [token, isAuthentic])
 
     if (!isAuthentic) {
         return (

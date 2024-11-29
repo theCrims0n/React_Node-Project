@@ -20,7 +20,11 @@ const Login = () => {
 
     const onSubmit = async (body: any) => {
         try {
-           await login(body)
+            const result: any = await login(body)
+            if (result.status != 200) {
+                return
+            }
+            navigate('/')
         } catch (error) {
             console.log(error)
         }

@@ -32,11 +32,7 @@ class Server {
 
     middlewares() {
         this.app.use(express.json())
-        this.app.use(cors({
-            credentials: true, 
-            origin: 'https://react-node-project-1-my5f.onrender.com' 
-            //origin: 'http://localhost:3000'
-        }))
+        this.app.use(cors({ credentials: true, origin: process.env.NODE_ENV == 'production' ? 'https://react-node-project-1-my5f.onrender.com' : 'http://localhost:3000' }))
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(express.static('public'))
         this.app.use(cookieParser())

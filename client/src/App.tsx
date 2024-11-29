@@ -25,17 +25,19 @@ const App = () => {
   const navigate = useNavigate()
   const { isAuthentic, clear, verify } = useAuthStore()
 
-  if (token) {
-    verify()
-  }
+  useEffect(() => {
+    if (token) {
+      verify()
+    }
 
-  if (!isAuthentic) {
-    navigate("/auth/login");
-    clear()
-  }
+    if (!isAuthentic) {
+      navigate("/auth/login");
+      clear()
+    }
+  }, [token, isAuthentic])
 
   return (
-    <div key={token} className='fade-in'>
+    <div className='fade-in'>
       <AuthProvider>
         <Routes>
           <Route element={<AuthPages />}>

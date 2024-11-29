@@ -35,6 +35,7 @@ export const useAuthStore = create<AuthStore>()(
                     const result = await axios.post(`/api/auth/login/`, body)
                     const { user, token } = result.data
                     set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
+                    return result
                 } catch (error: any) {
                     const { mssge } = error.response.data
                     set({ isLoading: false, isAuthentic: false, errorMessage: mssge })

@@ -59,8 +59,6 @@ export const verifyToken = async (req: Request, res: Response) => {
             return
         }
         res.json({ user })
-        return
-
     }
     catch (error) {
         console.log(error)

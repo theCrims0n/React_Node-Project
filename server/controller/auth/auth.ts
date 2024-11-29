@@ -27,7 +27,7 @@ export const login = async (req: Request, res: Response) => {
 
         await createJWT(id, name).then((result: any) => {
 
-            const { token } = result
+            const token = result
             res.cookie("token", token, {
                 sameSite: 'none',
                 httpOnly: true,

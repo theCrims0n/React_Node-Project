@@ -7,9 +7,6 @@ import UsersList from './pages/users/list/List';
 import Login from './pages/auth/login/Login';
 import Register from './pages/auth/register/Register';
 import Recovery from './pages/auth/recovery/Recovery';
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
-import { useAuthStore } from './store/auth/auth';
 import RegisterUser from './pages/users/register/Register';
 import AuthPages from './pages/auth/protected/AuthPages';
 import EditUser from './pages/users/edit/Edit';
@@ -20,18 +17,6 @@ import Profile from './pages/main/profile/Profile';
 import ProfileEditUser from './pages/main/profile/edit/Edit';
 
 const App = () => {
-
-  const { isAuthentic, verify } = useAuthStore()
-  const token = Cookies.get('token')
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    verify()
-    if (!isAuthentic) {
-      navigate('/auth/login')
-      window.location.reload()
-    }
-  }, [token, isAuthentic])
 
   return (
     <div className='fade-in'>

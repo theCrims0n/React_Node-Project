@@ -1,21 +1,25 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import Navbar from "../../components/ui/navbar/Navbar"
 import Footer from "../../components/ui/footer/Footer"
 import { useAuthStore } from "../../store/auth/auth"
 import { Sidebar } from "../../components/ui/sidebar/SideBar"
 import { useUIStore } from "../../store/ui/sidebar"
 import Spinner from "../../components/ui/spinner/Spinner"
-import { useEffect } from "react"
-import Cookies from "js-cookie"
 
 const ProtectedRoute = () => {
 
     const { isAuthentic } = useAuthStore()
     const { isSideMenuOpen, closeSideMenu } = useUIStore();
-   
+
+    if (!isAuthentic) {
+        return (
+            <Navigate to={'/auth/login'} />
+        )
+    }
+
     return (
         <>
-            <main className={`fade-in flex flex-col min-h-screen shrink min-w-96 `} >
+            <main key={Number(isAuthentic)} className={`fade-in flex flex-col min-h-screen shrink min-w-96 `} >
                 {isAuthentic ?
                     <>
                         <Sidebar />

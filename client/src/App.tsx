@@ -35,7 +35,7 @@ const App = () => {
   }
 
   return (
-    <div key={token || Number(isAuthentic)} className='fade-in'>
+    <div key={token} className='fade-in'>
       <AuthProvider>
         <Routes>
           <Route element={<AuthPages />}>

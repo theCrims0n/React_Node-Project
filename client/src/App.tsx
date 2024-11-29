@@ -27,12 +27,11 @@ const App = () => {
 
   useEffect(() => {
     verify()
+    if (!isAuthentic) {
+      navigate('/auth/login')
+      window.location.reload()
+    }
   }, [token, isAuthentic])
-
-  if (!isAuthentic) {
-    navigate('/auth/login')
-    window.location.reload()
-  }
 
   return (
     <div className='fade-in'>

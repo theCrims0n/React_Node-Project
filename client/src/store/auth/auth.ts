@@ -33,8 +33,10 @@ export const useAuthStore = create<AuthStore>()(
                 try {
                     set({ isLoading: true, isAuthentic: false, errorMessage: '' })
                     const result = await axios.post(`/api/auth/login/`, body)
+                    console.log(result)
                     const { user, token } = result.data
                     set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
+                    return result;
                 } catch (error: any) {
                     const { mssge } = error.response.data
                     set({ isLoading: false, isAuthentic: false, errorMessage: mssge })
@@ -63,7 +65,7 @@ export const useAuthStore = create<AuthStore>()(
                     return result
                 } catch (error) {
                     console.log(error)
-                    toast.error('Unauthenticated user')
+                    //toast.error('Unauthenticated user')
                     set({ isAuthentic: false, isLoading: false })
                 }
             },

@@ -32,8 +32,7 @@ export const useAuthStore = create<AuthStore>()(
             login: async (body) => {
                 try {
                     set({ isLoading: true, isAuthentic: false, errorMessage: '' })
-                    axios.defaults.withCredentials = true;
-                    const result = await axios.post(`/api/auth/login/`, body, { withCredentials: true })
+                    const result = await axios.post(`/api/auth/login/`, body)
                     const { user, token } = result.data
                     //Cookies.set('token', token)
                     set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })

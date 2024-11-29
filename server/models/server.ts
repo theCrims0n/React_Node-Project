@@ -38,7 +38,7 @@ class Server {
             //origin: 'http://localhost:3000'
         }))
         this.app.use(express.urlencoded({ extended: true }))
-        this.app.use(express.static('public'))
+        //this.app.use(express.static('public'))
         this.app.use(cookieParser())
     }
 

@@ -35,9 +35,10 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = yield (0, jwt_1.createJWT)(id, name);
         res.cookie("token", token, {
             sameSite: 'none',
-            httpOnly: false,
-            secure: true,
-        }).json({ user, token });
+            httpOnly: true,
+            secure: process.env.NODE_ENV == 'production' ? true : false,
+        });
+        res.json({ user, token });
     }
     catch (error) {
         console.log(error);

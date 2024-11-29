@@ -61,7 +61,6 @@ const verifyToken = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return;
         }
         res.json({ user });
-        return;
     }
     catch (error) {
         console.log(error);

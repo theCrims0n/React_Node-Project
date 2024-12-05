@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 import { Users } from '../../interface/users/users';
 import axios from '../../axios/axios';
 import { toast } from 'sonner';
-import Cookies from 'js-cookie';
+import { socket } from '../../socket/socket';
 
 interface AuthStore {
     isLogged: boolean;
@@ -13,7 +13,7 @@ interface AuthStore {
     token: string,
     errorMessage: '';
     login: (body: Users) => void;
-    logout: () => void;
+    logout: (user: Users) => void;
     verify: () => void;
     signup: (body: Users) => void;
     recover: (email: string, password: string) => void;
@@ -35,6 +35,8 @@ export const useAuthStore = create<AuthStore>()(
                     const result = await axios.post(`/api/auth/login/`, body)
                     const { user, token } = result.data
                     set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
+                    socket.connect();
+                    socket.emit('enterChat', user)
                     return result;
                 } catch (error: any) {
                     const { mssge } = error.response.data
@@ -42,12 +44,14 @@ export const useAuthStore = create<AuthStore>()(
                     return
                 }
             },
-            logout: async () => {
+            logout: async (user) => {
                 try {
                     set({ isLoading: true })
                     const result = await axios.get(`/api/auth/logout/`)
                     if (result.status == 200) {
                         set({ isAuthentic: false, isLoading: false })
+                        socket.disconnect();
+                        socket.emit('createMessage', { user: user, message: `${user.name} is disconnected` })
                         return
                     }
                 } catch (error) { }
@@ -58,13 +62,14 @@ export const useAuthStore = create<AuthStore>()(
                     const result = await axios.get(`/api/auth/verify`)
                     if (result.status != 200) {
                         set({ isAuthentic: false, isLoading: false })
+                        socket.disconnect();
                         return
                     }
                     set({ isAuthentic: true, isLoading: false })
                     return result
                 } catch (error) {
                     console.log(error)
-                    //toast.error('Unauthenticated user')
+                    socket.disconnect();
                     set({ isAuthentic: false, isLoading: false })
                 }
             },

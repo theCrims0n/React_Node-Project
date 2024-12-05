@@ -15,11 +15,12 @@ import InvitationsList from './pages/invitations/list/List';
 import AdminRoute from './pages/admin/AdminRoute';
 import Profile from './pages/main/profile/Profile';
 import ProfileEditUser from './pages/main/profile/edit/Edit';
+import Chat from './pages/main/chat/Chat';
 
 const App = () => {
 
   return (
-    <div className='fade-in'>
+    <div >
       <AuthProvider>
         <Routes>
           <Route element={<AuthPages />}>
@@ -31,6 +32,7 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/profile/edit/' element={<ProfileEditUser />} />
+            <Route path='/chat' element={<Chat />} />
             <Route element={<AdminRoute />} >
               <Route path='/users/list/:page' element={<UsersList />} />
               <Route path='/invitations/list/:page' element={<InvitationsList />} />

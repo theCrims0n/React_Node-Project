@@ -32,7 +32,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="block w-full max-w-screen-xl px-4 py-2 mx-auto text-white bg-white shadow-md rounded-2xl lg:px-8 lg:py-3 mt-10">
+            <nav className="relative m-10 block w-full max-w-screen-xl px-4 py-2 mx-auto text-white bg-white shadow-md rounded-2xl lg:px-8 lg:py-3 mt-10">
                 <div className="flex items-center justify-between">
                     <div className="flex shrink-0 flex items-center ">
                         {user.role_id == 1 && (<button onClick={() => { openSideMenu() }} className="flex justify-start pe-8">
@@ -47,10 +47,10 @@ const Navbar = () => {
                             </Link>
                         </motion.div>
                     </div>
-                    <div ref={ref} className="relative ml-3">
-                        <div className="flex justify-end">
-                            <button onClick={handleOpen} type="button" className="relative flex rounded-full text-sm focus:outline" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-800">
+                    <div ref={ref} className="relative ">
+                        <div className="flex justify-end pr-6">
+                            <button onClick={handleOpen} type="button" className="flex rounded-full text-sm focus:outline" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                <div className="inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-800">
                                     <span className="font-medium text-gray-100 dark:text-gray-100 uppercase">{user.name[0] + user.lastname[0]}</span>
                                 </div>
                             </button>
@@ -88,7 +88,8 @@ const Navbar = () => {
                                     </p>
                                 </Link>
                                 <Link
-                                    to='/'
+                                    onClick={handleOpen}
+                                    to='/chat'
                                     role="menuitem"
                                     className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
                                 >
@@ -115,7 +116,7 @@ const Navbar = () => {
                                 </Link>
                                 <hr className="my-2 border-slate-200" role="menuitem" />
                                 <button
-                                    onClick={() => [logout(), handleOpen()]}
+                                    onClick={() => [logout(user), handleOpen()]}
                                     role="menuitem"
                                     className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
                                 >

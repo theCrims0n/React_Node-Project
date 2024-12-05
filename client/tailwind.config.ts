@@ -11,7 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-       sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
+        sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
       },
       gridAutoColumns: {
         '2fr': 'minmax(0, 2fr)',
@@ -23,6 +23,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 }
 export default config

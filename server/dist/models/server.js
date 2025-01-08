@@ -31,7 +31,7 @@ class Server {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
         this.server = (0, node_http_1.createServer)(this.app);
-        this.io = new socket_io_1.Server(this.server, { cors: { origin: 'https://react-node-project-1-my5f.onrender.com' }, connectionStateRecovery: {} });
+        this.io = new socket_io_1.Server(this.server, { cors: { origin: 'http://localhost:3000' }, connectionStateRecovery: {} });
         this.dbConnection();
         this.middlewares();
         this.routes();
@@ -50,8 +50,8 @@ class Server {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)({
             credentials: true,
-            origin: 'https://react-node-project-1-my5f.onrender.com'
-            //origin: 'http://localhost:3000'
+            //origin: 'https://react-node-project-1-my5f.onrender.com' 
+            origin: 'http://localhost:3000'
         }));
         this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use(express_1.default.static('public'));
@@ -67,31 +67,42 @@ class Server {
         this.io.on('connection', (socket) => {
             console.log('An user has connected');
             socket.on('enterChat', (user) => {
-                if (!user.email) {
-                    return;
-                }
-                usersChat.addUsers(socket.id, user.email, user.name, user.lastname);
-            });
-            socket.on('createMessage', (data) => {
-                const { name, message: oldMessage } = data;
-                const message = (0, message_1.default)(name, oldMessage, '');
-                socket.broadcast.emit('createMessage', message);
+                const { email, name, lastname, id: user_id } = user;
+                usersChat.addUsers(socket.id, email, name, lastname, user_id);
             });
             socket.on('privateMessage', (data) => {
                 const user = usersChat.findUser(socket.id);
                 const { name } = user;
                 const { message, to, from } = data;
                 const me = from;
-                this.io.to(to).to(socket.id).emit('privateMessage', (0, message_1.default)(name, message, me));
+                usersChat.saveMessage(data).then((chat_id) => __awaiter(this, void 0, void 0, function* () {
+                    const messages = yield usersChat.setLastMessages(socket.id);
+                    const chats = yield usersChat.setAllMessages(chat_id);
+                    this.io.to(to).to(socket.id).emit('privateMessage', (0, message_1.default)(name, message, me, messages, chats));
+                }));
             });
             socket.on('getUsersConnected', () => {
                 const result = usersChat.getUsers();
                 console.log(result);
                 this.io.emit('getUsersConnected', result);
             });
+            socket.on('setAllMessages', (data) => __awaiter(this, void 0, void 0, function* () {
+                const { id, to } = data;
+                const messages = yield usersChat.setAllMessages(id);
+                this.io.to(socket.id).to(to).emit('setAllMessages', messages);
+            }));
+            socket.on('setLastMessages', (data) => __awaiter(this, void 0, void 0, function* () {
+                const { to } = data;
+                const messagesFrom = yield usersChat.setLastMessages(socket.id);
+                const messagesTo = yield usersChat.setLastMessages(to);
+                this.io.to(socket.id).emit('setLastMessages', messagesFrom);
+                this.io.to(to).emit('setLastMessages', messagesTo);
+            }));
             socket.on('disconnect', () => {
                 const user = usersChat.deleteUser(socket.id);
                 const { name } = user;
+                const result = usersChat.getUsers();
+                this.io.emit('getUsersConnected', result);
                 console.log(`An user has disconnected ${name}`);
             });
             socket.on('chat message', (message) => {

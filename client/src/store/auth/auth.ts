@@ -34,8 +34,8 @@ export const useAuthStore = create<AuthStore>()(
                     set({ isLoading: true, isAuthentic: false, errorMessage: '' })
                     const result = await axios.post(`/api/auth/login/`, body)
                     const { user, token } = result.data
-                    set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
                     socket.connect();
+                    set({ user: user, token: token, isAuthentic: true, isLogged: true, errorMessage: '', isLoading: false })
                     socket.emit('enterChat', user)
                     return result;
                 } catch (error: any) {

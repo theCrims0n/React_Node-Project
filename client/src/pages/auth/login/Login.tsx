@@ -12,15 +12,13 @@ const Login = () => {
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
 
-    const { login, token, isAuthentic, isLogged, isLoading, errorMessage, clear } = useAuthStore()
-
-    const navigate = useNavigate()
+    const { login, token, isAuthentic, isLogged, isLoading, errorMessage, clear, user } = useAuthStore()
 
     const [state, setState] = useState(false)
 
     const onSubmit = async (body: any) => {
         try {
-           await login(body)
+            await login(body)
         } catch (error) {
             console.log(error)
         }

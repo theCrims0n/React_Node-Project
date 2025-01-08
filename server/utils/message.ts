@@ -1,7 +1,7 @@
-const createMessage = (name: string, message: string, me: string) => {
+const createMessage = (name: string, message: string, me: string, messages: [], chats: []) => {
 
     return {
-        name, message, date: new Date().getTime(), me: me
+        name, message, date: new Date().getTime(), me: me, messages: messages, chats: chats
     }
 }
 

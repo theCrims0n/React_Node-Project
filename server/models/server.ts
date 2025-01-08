@@ -71,16 +71,8 @@ class Server {
             console.log('An user has connected')
 
             socket.on('enterChat', (user: any) => {
-                if (!user.email) {
-                    return
-                }
-                usersChat.addUsers(socket.id, user.email, user.name, user.lastname)
-            })
-
-            socket.on('createMessage', (data) => {
-                const { name, message: oldMessage } = data
-                const message = createMessage(name, oldMessage, '')
-                socket.broadcast.emit('createMessage', message)
+                const { email, name, lastname, id: user_id } = user
+                usersChat.addUsers(socket.id, email, name, lastname, user_id)
             })
 
             socket.on('privateMessage', (data: any) => {
@@ -88,7 +80,11 @@ class Server {
                 const { name } = user
                 const { message, to, from } = data
                 const me = from
-                this.io.to(to).to(socket.id).emit('privateMessage', createMessage(name, message, me))
+                usersChat.saveMessage(data).then(async (chat_id) => {
+                    const messages: any = await usersChat.setLastMessages(socket.id);
+                    const chats: any = await usersChat.setAllMessages(chat_id);
+                    this.io.to(to).to(socket.id).emit('privateMessage', createMessage(name, message, me, messages, chats))
+                })
             })
 
             socket.on('getUsersConnected', () => {
@@ -97,9 +93,25 @@ class Server {
                 this.io.emit('getUsersConnected', result)
             })
 
+            socket.on('setAllMessages', async (data) => {
+                const { id, to } = data
+                const messages = await usersChat.setAllMessages(id)
+                this.io.to(socket.id).to(to).emit('setAllMessages', messages)
+            })
+
+            socket.on('setLastMessages', async (data) => {
+                const { to } = data
+                const messagesFrom = await usersChat.setLastMessages(socket.id)
+                const messagesTo = await usersChat.setLastMessages(to)
+                this.io.to(socket.id).emit('setLastMessages', messagesFrom)
+                this.io.to(to).emit('setLastMessages', messagesTo)
+            })
+
             socket.on('disconnect', () => {
                 const user: any = usersChat.deleteUser(socket.id)
                 const { name } = user
+                const result = usersChat.getUsers()
+                this.io.emit('getUsersConnected', result)
                 console.log(`An user has disconnected ${name}`)
             })
 

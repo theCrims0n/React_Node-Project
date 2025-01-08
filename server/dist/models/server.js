@@ -31,7 +31,7 @@ class Server {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
         this.server = (0, node_http_1.createServer)(this.app);
-        this.io = new socket_io_1.Server(this.server, { cors: { origin: 'http://localhost:3000' }, connectionStateRecovery: {} });
+        this.io = new socket_io_1.Server(this.server, { cors: { origin: 'https://react-node-project-1-my5f.onrender.com' }, connectionStateRecovery: {} });
         this.dbConnection();
         this.middlewares();
         this.routes();
@@ -50,8 +50,8 @@ class Server {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)({
             credentials: true,
-            //origin: 'https://react-node-project-1-my5f.onrender.com' 
-            origin: 'http://localhost:3000'
+            origin: 'https://react-node-project-1-my5f.onrender.com'
+            //origin: 'http://localhost:3000'
         }));
         this.app.use(express_1.default.urlencoded({ extended: true }));
         this.app.use(express_1.default.static('public'));

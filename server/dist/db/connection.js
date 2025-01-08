@@ -15,7 +15,7 @@ const db = new sequelize_1.Sequelize(bdname, username, password, {
     logging: false,
     dialectOptions: {
         ssl: { rejectUnauthorized: false, require: true },
-    }
+    },
 });
 exports.default = db;
 //# sourceMappingURL=connection.js.map

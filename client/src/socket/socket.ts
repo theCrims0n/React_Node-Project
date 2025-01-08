@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-const URL = 'http://localhost:3001';
+const URL = 'https://react-node-project-rqif.onrender.com';
 
 export const socket = io(URL, {
     reconnection: true,
